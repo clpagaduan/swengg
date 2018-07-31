@@ -4,7 +4,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',NULL,'swengg');
+$dbc=mysqli_connect('localhost','root','password','mydb');
 
 if (!$dbc) {
  die('Could not connect: '.mysql_error());
@@ -29,7 +29,7 @@ $i10=$_POST['i10'];
      
    $i1=$_POST['i1'];
    
-            $query = "UPDATE userpreferences SET interest1 = '$i1',interest2 = '$i2',interest3 = '$i3',interest6 = '$i6',interest5 = '$i5',interest4 = '$i4',interest7 = '$i7',interest8 = '$i8',interest9 = '$i9',interest10 = '$i10' WHERE ID=1 ";
+            $query = "UPDATE user-preferences SET interest1 = '$i1',interest2 = '$i2',interest3 = '$i3',interest6 = '$i6',interest5 = '$i5',interest4 = '$i4',interest7 = '$i7',interest8 = '$i8',interest9 = '$i9',interest10 = '$i10' WHERE ID=1 ";
             $result = mysqli_query($dbc, $query);
   
     
@@ -108,7 +108,7 @@ $i10=$_POST['i10'];
                     <th>Interests</th>
                   </tr>
                   <?php
-                    $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM userpreferences where ID=1";
+                    $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM 'mydb.user-preferences' where ID='1'";
                    
  $result=mysqli_query($dbc,$query);
                     if (!$result) {

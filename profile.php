@@ -4,7 +4,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',NULL,'swengg');
+$dbc=mysqli_connect('localhost','root','password','mydb');
 
 if (!$dbc) {
  die('Could not connect: '.mysql_error());
