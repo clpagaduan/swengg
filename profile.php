@@ -90,7 +90,7 @@ if (isset($_POST['submit'])){}
                     <th>Interests</th>
                   </tr>
                   <?php
-                    $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM userpreferences where ID=1";
+                    $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM mydb.userpreferences where ID=1";
                    
  $result=mysqli_query($dbc,$query);
                     if (!$result) {
