@@ -30,7 +30,7 @@ $result = mysqli_query($dbc, $query);
     <html>
 
     <head>
-        <link rel="stylesheet" href="msg.css">
+        <link rel="stylesheet" href="msg1.css">
         <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
         <script>
             $(document).ready(function() {

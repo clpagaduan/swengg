@@ -13,9 +13,6 @@ if (!$dbc) {
 
 
 
-if (isset($_POST['submit'])){}
-
-
 
 ?>
 
@@ -29,7 +26,7 @@ $result = mysqli_query($dbc, $query);
 while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 if($row['id']==1){
    echo" <div  class=\"banner\">
-<div class=\"container\">
+<div class=\"containers\">
   <p align=\"right\"> {$row['user']}</p>
   <p align=\"right\"> {$row['message']}</p>
   <span class=\"time-right\">{$row['whenn']}</span>
@@ -40,7 +37,7 @@ if($row['id']==1){
     if($row['rid']==1){
     
    echo" <div  class=\"banner\">
-<div class=\"container\">
+<div class=\"containers darker\">
 <p align=\"left\"> {$row['user']}</p>
   <p> {$row['message']}</p>
   <span class=\"time-left\">{$row['whenn']}</span>
