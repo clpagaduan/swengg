@@ -8,6 +8,63 @@
   <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
 
 <body>
+    <?php
+    session_start();
+    
+    $dbc=mysqli_connect('localhost','root','password','mydb');
+    
+    $flag=0;
+    $message=null;
+    if (isset($_POST['login'])){
+        $empties=$invalid=0;
+        
+        if(!empty($_POST['username']) && (!empty($_POST['password']))){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            
+            echo $username;
+            echo $password2=md5($password);
+            
+            $sql = 'SELECT id from users where username = "'.$username.'" AND password =("'.$password2.'")';
+            
+            $result = mysqli_query($dbc, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+//            $active = $row['active'];
+            $count = mysqli_num_rows($result);
+            
+            if ($count == 1){
+                $_SESSION['username'] = $username;
+                header("location: profile.php");
+            } else {
+                echo "Error: " . mysqli_error($dbc);
+            }
+            
+//            if($total = mysqli_num_rows($result)==1){
+//                $_SESSION['username'] = $username;
+//                header("location: profile.php");
+//            } else {
+//                echo "Error: " . mysqli_error($dbc);
+//            }
+        }
+        if (empty($_POST['username'])){
+          $username=FALSE;
+          $un="<font color='red'>*</font>";
+          $empties++;
+
+        }
+        if (empty($_POST['password'])){
+          $password=FALSE;
+          $pw="<font color='red'>*</font>";
+          $empties++;
+
+        }
+        if ($empties >0){
+
+            $message="<div class='alert alert-danger'><span aria-hidden='true'><b><center>Please do not leave the fields blank</center></span></div>";
+        }
+        
+    }
+    ?>
   <div class="py-5" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
     <div class="container">
       <div class="row">
@@ -20,14 +77,14 @@
           <div class="card">
             <div class="card-body p-5">
               <h3 class="pb-3">Login</h3>
-              <form action="https://formspree.io/YOUREMAILHERE">
+              <form action = "<?php echo $_SERVER['PHP_SELF']; ?>" method = "post">
                 <div class="form-group">
                   <label>Username</label>
-                  <input class="form-control" placeholder="Username"> </div>
+                  <input class="form-control" name="username" placeholder="Username" value="<?php if (isset($_POST['username']) && !$flag) echo $_POST['username']; ?>"> </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" class="form-control"> </div>
-                <button type="submit" class="btn mt-2 btn-outline-dark">Login &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <input type="password" name="password" class="form-control" value="<?php if (isset($_POST['password']) && !$flag) echo $_POST['password']; ?>"> </div>
+                <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                   <br> </button>
               </form>
             </div>
