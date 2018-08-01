@@ -68,7 +68,7 @@ echo $username;
                   <i class="fa fa-home fa-home"></i>&nbsp;Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="profile.html">
+                <a class="nav-link active" href="profile.php">
                   <i class="fa fa-user fa-fw"></i>Profile
                   <br> </a>
               </li>
@@ -78,13 +78,17 @@ echo $username;
                   <br> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="messages.html">
+                <a class="nav-link" href="messages.php">
                   <i class="fa fa-fw fa-inbox"></i>Messages
                   <br> </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <i class="fa fa-fw fa-cog"></i>Settings</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="login.php">
+                  <i class="fa fa-fw fa-sign-out"></i>Logout</a>
               </li>
             </ul>
           </div>
@@ -186,9 +190,11 @@ echo $username;
       <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
       <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"> </div>
   </form>
+<!--
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
+-->
 </body>
 
 </html>

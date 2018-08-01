@@ -86,7 +86,8 @@
                   <input type="password" name="password" class="form-control" value="<?php if (isset($_POST['password']) && !$flag) echo $_POST['password']; ?>"> </div>
                 <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login
                   </button><br> <br>
-                  Not yet registered? <a href="signup.php"> Sign up now!</a>
+                  Not yet registered? <a href="signup.php"> Sign up now!</a><br>
+                  <a href="">Admin</a>
               </form>
             </div>
           </div>
@@ -98,9 +99,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
+<!--
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
+-->
 </body>
 
 </html>

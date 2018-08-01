@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root','password','swengg');
+$dbc=mysqli_connect('localhost','root','password','mydb');
 
 
 
@@ -21,15 +21,21 @@ if (!$dbc) {
 $chatid=1;
 $id=1;
 $rid=2;
-$user="pepe";
+$user="user1";
 
 
 if (isset($_POST['submit'])){
     
-
+//echo 'henlo';
    $txt=$_POST['txt'];
-$query="INSERT INTO s_chat_messages (chatid,id,rid,user,message,whenn) VALUES (NULL,'$id','$rid','$user','$txt',NOW())";
-$result = mysqli_query($dbc, $query);
+$query="INSERT INTO s_chat_messages (chatID,id,rid,user,message,whenn) VALUES (NULL,'$id','$rid','$user','$txt',NOW())";
+//$result = mysqli_query($dbc, $query);
+    
+    if (mysqli_query($dbc, $query)){
+//            echo "Registered!";
+        } else {
+            echo "Error: " . mysqli_error($dbc);
+        }
 }
 
 ?>
@@ -73,17 +79,17 @@ $result = mysqli_query($dbc, $query);
                 <i class="fa fa-home fa-home"></i>&nbsp;Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="profile.php">
                 <i class="fa fa-user fa-fw"></i>Profile
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="browse.html" class="nav-link">
                 <i class="fa fa-fw fa-search"></i>Browse
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="message.html">
+              <a class="nav-link active" href="messages.php">
                 <i class="fa fa-fw fa-inbox"></i>Messages
                 <br> </a>
             </li>
@@ -91,6 +97,10 @@ $result = mysqli_query($dbc, $query);
               <a class="nav-link" href="#">
                 <i class="fa fa-fw fa-cog"></i>Settings</a>
             </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="login.php">
+                  <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+              </li>
           </ul>
         </div>
         <div class="col-md-6 justify-content-center border">
@@ -98,7 +108,7 @@ $result = mysqli_query($dbc, $query);
             <div class="col">
               <div class="row-md-12 border-primary border">
                 <img src="../../../Users/Danielle Marie/Desktop/Files/p12348.jpg" height="100" width="100" class="img">
-                <span class="testimonials-name">Lina Mars</span>
+                <span class="testimonials-name"><?php echo"{$user}" ?></span>
               </div>
             </div>
           </div>

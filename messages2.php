@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',NULL,'swengg');
+$dbc=mysqli_connect('localhost','root','password','mydb');
 
 
 
@@ -15,7 +15,7 @@ if (!$dbc) {
 $chatid=1;
 $id=2;
 $rid=1;
-$user="pepe2";
+$user="user2";
 
 
 if (isset($_POST['submit'])){
