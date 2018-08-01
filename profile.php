@@ -81,8 +81,7 @@
           </div>
           <div class="col-md-4 justify-content-center">
             <div class="card">
-              <img class="card-img-top mx-auto" src="<?php $photo; ?>" alt="Card image cap">
-                
+              <img class="card-img-top mx-auto" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">
                   <?php echo $photo. $username1. ', '.$age. ' (' .$dlsuID. ')';?>
@@ -94,7 +93,7 @@
           </div>
           <div class="col-md-4">
             <div class="row">
-              <div class="col-md-12"> '; } ?&gt;
+              <div class="col-md-12"> 
                 <table class="table">
                   <tbody>
                     <tr> </tr>
@@ -116,6 +115,7 @@
 	               
                     echo '
                   <tr-->
+<!--
                     <tr>
                       <td>'.$row['interest1'].'</td>
                     </tr>
@@ -146,6 +146,7 @@
                     <tr>
                       <td>'.$row['interest10'].'</td>
                     </tr>
+-->
                   </tbody>
                 </table>
               </div>
