@@ -84,8 +84,9 @@
                 <div class="form-group">
                   <label>Password</label>
                   <input type="password" name="password" class="form-control" value="<?php if (isset($_POST['password']) && !$flag) echo $_POST['password']; ?>"> </div>
-                <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  <br> </button>
+                <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login
+                  </button><br> <br>
+                  Not yet registered? <a href="signup.php"> Sign up now!</a>
               </form>
             </div>
           </div>

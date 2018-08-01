@@ -132,7 +132,7 @@ echo $username;
                    
 	               
                     echo '
-                  <tr-->
+                  <tr--
                     <tr>
                       <td>
                         <input name="i1" type="text" value="'.$row['interest1'].'"> </td>
@@ -172,7 +172,7 @@ echo $username;
                     <tr>
                       <td>
                         <input name="i10" type="text" value="'.$row['interest10'].'"> </td>
-                    </tr>
+                    </tr>-->
                   </tbody>
                 </table>
               </div>

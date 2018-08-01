@@ -107,7 +107,9 @@ $flag=1;
                   <label for="exampleInputEmail1">Password</label>
                   <input type="password" name="password" value="<?php if (isset($_POST['password']) && !$flag) echo $_POST['password']; ?>" class="form-control" required> </div>
                 <button type="submit" name="register" class="btn mt-2 btn-outline-dark">Sign up
-                  <br> </button>
+                  </button>
+                  <br><br>
+                  Already have an existing account? <a href="login.php"> Log in here.</a>
               </form>
             </div>
           </div>
