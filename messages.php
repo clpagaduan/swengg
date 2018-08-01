@@ -1,11 +1,68 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+
+$dbc=mysqli_connect('localhost','root',NULL,'swengg');
+
+
+
+
+
+if (!$dbc) {
+ die('Could not connect: '.mysql_error());
+
+
+
+
+}
+
+
+$chatid=1;
+$id=1;
+$rid=2;
+$user="pepe";
+
+
+if (isset($_POST['submit'])){
+    
+
+   $txt=$_POST['txt'];
+$query="INSERT INTO s_chat_messages (chatid,id,rid,user,message,whenn) VALUES (NULL,'$id','$rid','$user','$txt',NOW())";
+$result = mysqli_query($dbc, $query);
+}
+
+?>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="msg.css" type="text/css"> </head>
+  <link rel="stylesheet" href="msg.css" type="text/css">    <link rel="stylesheet" href="msg.css">
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript">
+        window.onload=function () {
+     var objDiv = document.getElementById("sc");
+     objDiv.scrollTop = objDiv.scrollHeight;
+}
+        
+        </script>
+        <script>
+            $(document).ready(function() {
+                setInterval(function() {
+                    $("#screen").load('messagesid.php')
+                }, 100);
+            });
+            
+            function scrollToBottom() {
+
+
+        var objDiv = document.getElementById("sc");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+
+        </script></head>
 
 <body>
   <div class="py-4">
