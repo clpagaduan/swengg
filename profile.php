@@ -29,8 +29,8 @@
     $age = $record['age'];
     $description = $record['description'];
     $rawPhoto = $record['photo'];
-    $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:30px;height:30px"/>';
-    echo $photo;
+    $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
+//    echo $photo;
 //    echo 'username1: '. $username1;
     };
     ?>
@@ -81,10 +81,13 @@
           </div>
           <div class="col-md-4 justify-content-center">
             <div class="card">
-              <img class="card-img-top mx-auto" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap">
+                <div class="card"><center>
+                    <?php echo $photo;?> </center>
+                </div>
+<!--              <img class="card-img-top mx-auto" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap">-->
               <div class="card-body">
                 <h5 class="card-title">
-                  <?php echo $photo. $username1. ', '.$age. ' (' .$dlsuID. ')';?>
+                  <?php echo $username1. ', '.$age. ' (' .$dlsuID. ')';?>
                   </h5>
                 <p class="card-text"><?php echo $description;?></p>
                 <button class="btn btn-primary" name="submit" type="submit">Edit Profile</button>

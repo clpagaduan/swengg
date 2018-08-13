@@ -7,16 +7,8 @@ $username = $_SESSION['username'];
 echo $username; 
 }
 ?>
-<html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
-
-<body>
-    <?php
+<?php
     require_once('mysql_connect.php');
 //    $dbc=mysqli_connect('localhost','root','password','mydb');
     $flag=0;
@@ -26,18 +18,21 @@ echo $username;
     if (isset($_POST['update'])){
         $message=null;
         
-        $photo=$_POST['photo'];
+//        $photo=$_POST['photo'];
         $age=$_POST['age'];
         $description=$_POST['description'];
         $interest1=$_POST['interest1'];
         
+        $imagename  = $_FILES["myimage"]["name"];
+        $imagetmp = addslashes(file_get_contents($_FILES['myimage']['tmp_name']));
+        
         echo $username;
-        echo $photo;
+//        echo $photo;
         echo $age;
         echo $description;
         echo $interest1;
         
-        $query = "UPDATE mydb.users set photo='$photo', age='$age', description='$description' WHERE username = '$username' ";
+        $query = "UPDATE mydb.users set photo='$imagetmp', age='$age', description='$description' WHERE username = '$username' ";
         
         if (mysqli_query($dbc, $query)){
             echo "Updated!";
@@ -48,7 +43,17 @@ echo $username;
     }
         
     ?>
-  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+
+<body>
+    
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
     <div class="py-3">
       <div class="container">
         <div class="row">
@@ -96,8 +101,8 @@ echo $username;
             <div class="card">
               <img class="card-img-top mx-auto" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap"> </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Photo</label>
-              <input type="file" class="form-control-file" name="photo" value="<?php if (isset($_POST['photo']) && !$flag) echo $_POST['photo']; ?>" id="inlineFormInput" placeholder="Jane Doe"> </div>
+              <label for="exampleInputEmail1">Photo</label><br>
+              <input type="file" name="myimage" class="btn btn-info btn-fill btn"> </div>
             <div class="form-group">
               <label>Name</label>
               <input type="text" class="form-control" placeholder="e.g. Juan"> </div>
@@ -110,8 +115,7 @@ echo $username;
             <div class="form-group">
               <label for="exampleInputEmail1">Interest 1</label>
               <input type="text" class="form-control" name="interest1" value="<?php if (isset($_POST['interest1']) && !$flag) echo $_POST['interest1']; ?>" id="inlineFormInput" placeholder="e.g. Studying"> </div>
-            <button type="submit" class="btn btn-primary" name="update">Save
-              <br> </button>
+            <input type='submit' name='update' class='btn btn-primary btn-fill' value='Update Profile'/> 
           </div>
           <div class="col-md-4">
             <div class="row">
