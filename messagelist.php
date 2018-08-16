@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html>
 
 <head>
@@ -8,6 +10,34 @@
   <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
 
 <body>
+ <?php
+        if(!isset($_SESSION)){
+        session_start();
+
+    $username = $_SESSION['username'];
+//    echo 'username: '. $username; 
+    }
+    require_once('mysql_connect.php');
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($dbc, $sql);
+    while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+    
+        $userID = $record['id'];
+        $fname = $record['firstname'];
+        $sname = $record['lastname'];
+        $dlsuID = $record['dlsuID'];
+        $age = $record['age'];
+        $description = $record['description'];
+        $rawPhoto = $record['photo'];
+        $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
+        
+      
+//    echo $photo;
+//    echo 'username1: '. $username1;
+    };
+    
+   
+    ?>
   <div class="py-4">
     <div class="container">
       <div class="row">
@@ -27,7 +57,7 @@
                 <i class="fa fa-home fa-home"></i>&nbsp;Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="profile.php">
                 <i class="fa fa-user fa-fw"></i>Profile
                 <br> </a>
             </li>
@@ -50,18 +80,29 @@
         <div class="col-md-6 justify-content-center">
           <div class="card">
             <div class="card-header">Inbox</div>
-            <div class="btn" align="left" a="" href="messageID.html">
-              <h4 align="left">Name, name</h4>
-              <p align="left">helo</p>
-            </div>
-            <div class="btn" align="left" a="" href="messageID.html">
-              <h4 align="left">Name, name</h4>
-              <p align="left">helo</p>
-            </div>
-            <div class="btn" align="left" a="" href="messages.php">
-              <h4 align="left">Name, name</h4>
-              <p align="left">helo</p>
-            </div>
+              <div class="column" onload="" name="sc"style='overflow:auto; height:300px;'>
+      <?php 
+              
+              
+                  
+                  
+              $sql = "SELECT * FROM s_chat_messages WHERE id='$userID' group by user";
+    $result = mysqli_query($dbc, $sql);
+               while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                   
+                  $ruser= $record['user'];
+                    $ruserid= $record['rid'];
+          $_SESSION['messagerec'] = $ruserid;
+                  
+                  $msg=$record['message'];
+              echo"
+            <a href=\"messages.php?id=$ruserid;\" class=\"nav-link active\">
+            <div class=\"btn\" align=\"left\" >
+              <h4 align=\"left\">$ruser</h4>
+              <p align=\"left\">$msg</p>
+            </div></a>";};
+          ?>
+              </div>
           </div>
         </div>
       </div>

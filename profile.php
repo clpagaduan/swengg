@@ -84,7 +84,7 @@
                   <br> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="messages.php">
+                <a class="nav-link disabled" href="messagelist.php">
                   <i class="fa fa-fw fa-inbox"></i>Messages
                   <br> </a>
               </li>

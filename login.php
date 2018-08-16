@@ -11,7 +11,7 @@
     <?php
     session_start();
     
-    $dbc=mysqli_connect('localhost','root','password','mydb');
+    $dbc=mysqli_connect('localhost','root',null,'mydb');
     
     $flag=0;
     $message=null;

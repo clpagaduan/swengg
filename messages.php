@@ -3,9 +3,10 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',null,'swengg');
+$dbc=mysqli_connect('localhost','root',null,'mydb');
 
-
+   $username = $_SESSION['username'];
+   $messagerec =$_SESSION['messagerec'];
 
 
 
@@ -17,11 +18,27 @@ if (!$dbc) {
 
 }
 
+$sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($dbc, $sql);
+    while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+    
+        $userID = $record['id'];
+        $fname = $record['firstname'];
+        $sname = $record['lastname'];
+        $dlsuID = $record['dlsuID'];
+        $age = $record['age'];
+        $description = $record['description'];
+        $rawPhoto = $record['photo'];
+        $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
+        
+      
+//    echo $photo;
+//    echo 'username1: '. $username1;
+    };
 
-$chatid=1;
-$id=1;
-$rid=2;
-$user="user1";
+$id=$userID;
+$rid=$messagerec;
+$user=$username;
 
 
 if (isset($_POST['submit'])){
@@ -89,7 +106,7 @@ $query="INSERT INTO s_chat_messages (chatID,id,rid,user,message,whenn) VALUES (N
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="messages.php">
+              <a class="nav-link active" href="messagelist.php">
                 <i class="fa fa-fw fa-inbox"></i>Messages
                 <br> </a>
             </li>

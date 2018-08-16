@@ -3,11 +3,42 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',null,'swengg');
+$dbc=mysqli_connect('localhost','root',null,'mydb');
+
+$username = $_SESSION['username'];
+   $messagerec =$_SESSION['messagerec'];
+
+
 
 if (!$dbc) {
  die('Could not connect: '.mysql_error());
+
+
+
+
 }
+
+$sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($dbc, $sql);
+    while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+    
+        $userID = $record['id'];
+        $fname = $record['firstname'];
+        $sname = $record['lastname'];
+        $dlsuID = $record['dlsuID'];
+        $age = $record['age'];
+        $description = $record['description'];
+        $rawPhoto = $record['photo'];
+        $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
+        
+      
+//    echo $photo;
+//    echo 'username1: '. $username1;
+    };
+
+$id=$userID;
+$rid=$messagerec;
+$user=$username;
 
 
 
@@ -24,7 +55,7 @@ if (!$dbc) {
 $query="SELECT * from s_chat_messages ORDER BY whenn DESC";
 $result = mysqli_query($dbc, $query);
 while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-if($row['id']==1){
+if($row['id']==$id){
    echo" <div  class=\"banner\">
 <div class=\"containers\">
   <p align=\"right\"> {$row['user']}</p>
@@ -34,7 +65,7 @@ if($row['id']==1){
 </div>"; }
     
     
-    if($row['rid']==1){
+    if($row['rid']==$rid){
     
    echo" <div  class=\"banner\">
 <div class=\"containers darker\">
