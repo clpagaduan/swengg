@@ -70,6 +70,7 @@ $empties=$invalid=0;
 //        echo $passwordNew;
         $query = "INSERT INTO mydb.users (username, dlsuID, email, password) VALUES ('$username', '$dlsuid', '$email', '$passwordNew')"; 
         
+        
 //        $result = mysqli_query($dbc,$query);
         
         if (mysqli_query($dbc, $query)){
@@ -77,6 +78,21 @@ $empties=$invalid=0;
         } else {
             echo "Error: " . mysqli_error($dbc);
         }
+        
+        $queryID = "SELECT id from mydb.users WHERE username = '$username'";      
+        $resultID=mysqli_query($dbc,$queryID);
+        $row = mysqli_fetch_array($resultID, MYSQLI_ASSOC);
+        $userID = $row['id'];
+        echo 'user id: ' . $userID;
+        
+        $queryInterest = "INSERT INTO mydb.userpreferences (userID) VALUES ('$userID')";
+        
+        if (mysqli_query($dbc, $queryInterest)){
+            echo "Registered!";
+        } else {
+            echo "Error: " . mysqli_error($dbc);
+        }
+        
         $message="<div class='alert alert-success'><span aria-hidden='true'><b><font color='black'><center>Account has been sent for approval!</center></font></span></div>";
 
 $flag=1;

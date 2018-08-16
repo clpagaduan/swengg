@@ -24,15 +24,34 @@
     $result = mysqli_query($dbc, $sql);
     while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
     
-    $username1 = $record['username'];
-    $dlsuID = $record['dlsuID'];
-    $age = $record['age'];
-    $description = $record['description'];
-    $rawPhoto = $record['photo'];
-    $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
+        $username1 = $record['username'];
+        $fname = $record['firstname'];
+        $sname = $record['lastname'];
+        $dlsuID = $record['dlsuID'];
+        $age = $record['age'];
+        $description = $record['description'];
+        $rawPhoto = $record['photo'];
+        $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
 //    echo $photo;
 //    echo 'username1: '. $username1;
     };
+    
+    $queryID = "SELECT id from mydb.users WHERE username = '$username'";      
+        $resultID=mysqli_query($dbc,$queryID);
+        $row = mysqli_fetch_array($resultID, MYSQLI_ASSOC);
+        $userID = $row['id'];
+        echo 'user id: ' . $userID;
+    
+    $queryInterest = "SELECT * FROM userpreferences WHERE userID = '$userID'";
+    $resultInterest = mysqli_query($dbc, $queryInterest);
+    while ($record1 = mysqli_fetch_array($resultInterest, MYSQLI_ASSOC)){
+        $interest1 = $record1['interest1'];
+        $interest2 = $record1['interest2'];
+        $interest3 = $record1['interest3'];
+        $interest4 = $record1['interest4'];
+        $interest5 = $record1['interest5'];
+    }
+    
     ?>
     
   <form action="profileEdit.php" method="post">
@@ -84,16 +103,27 @@
                 <div class="card"><center>
                     <?php echo $photo;?> </center>
                 </div>
-<!--              <img class="card-img-top mx-auto" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap">-->
-              <div class="card-body">
-                <h5 class="card-title">
-                  <?php echo $username1. ', '.$age. ' (' .$dlsuID. ')';?>
-                  </h5>
-                <p class="card-text"><?php echo $description;?></p>
-                <button class="btn btn-primary" name="submit" type="submit">Edit Profile</button>
-                <br> </div>
+                
+                <div class="card-body">
+                    <h5 class="card-title">
+                      <?php echo $fname . ' ' .$sname . ', '.$age. ' <br> ' .$dlsuID ;?>
+                      </h5>
+                    <p class="card-text">About me: <br><?php echo $description;?></p>
+                    
+                    <p class="card-text">Interests: 
+                        <br>
+                        <?php echo $interest1 . ', ' .$interest2. ', ' .$interest3. ', ' .$interest4. ', ' .$interest5;?>
+                    </p>
+                    
+                </div>
+                
+                <div class="card-footer">
+                    <button class="btn btn-primary" name="submit" type="submit">Edit Profile</button>
+                    <br> 
+                </div>
             </div>
           </div>
+<!--
           <div class="col-md-4">
             <div class="row">
               <div class="col-md-12"> 
@@ -103,6 +133,7 @@
                     <tr>
                       <th>Interests</th>
                     </tr>
+-->
                     <!--?php
                     $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM mydb.userpreferences where ID=1";
                    
@@ -118,6 +149,7 @@
 	               
                     echo '
                   <tr-->
+<!--
                     <tr>
                       <td>'.$row['interest1'].'</td>
                     </tr>
@@ -151,8 +183,9 @@
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
+-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
         <?php  ?>

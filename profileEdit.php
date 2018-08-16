@@ -19,9 +19,16 @@ echo $username;
         $message=null;
         
 //        $photo=$_POST['photo'];
+        $fname=$_POST['firstname'];
+        $sname=$_POST['lastname'];
         $age=$_POST['age'];
         $description=$_POST['description'];
+        
         $interest1=$_POST['interest1'];
+        $interest2=$_POST['interest2'];
+        $interest3=$_POST['interest3'];
+        $interest4=$_POST['interest4'];
+        $interest5=$_POST['interest5'];
         
         $imagename  = $_FILES["myimage"]["name"];
         $imagetmp = addslashes(file_get_contents($_FILES['myimage']['tmp_name']));
@@ -32,11 +39,31 @@ echo $username;
         echo $description;
         echo $interest1;
         
-        $query = "UPDATE mydb.users set photo='$imagetmp', age='$age', description='$description' WHERE username = '$username' ";
+        $userID = 0;
+        
+        $queryID = "SELECT id from mydb.users WHERE username = '$username'";
+        
+        $resultID=mysqli_query($dbc,$queryID);
+        $row = mysqli_fetch_array($resultID, MYSQLI_ASSOC);
+            
+        $userID = $row['id'];
+        
+        echo 'user id: ' . $userID;
+        
+        $query = "UPDATE mydb.users set firstname='$fname', lastname='$sname', photo='$imagetmp', age='$age', description='$description' WHERE username = '$username' ";
+        
+        $queryInterest = "UPDATE mydb.userpreferences set id='$userID', interest1='$interest1', interest2='$interest2' , interest3='$interest3', interest4='$interest4', interest5='$interest5'";
+        if (mysqli_query($dbc, $queryInterest)){
+                echo "Updated!";
+            } else {
+                echo "Error: " . mysqli_error($dbc);
+            }
+        
         
         if (mysqli_query($dbc, $query)){
             echo "Updated!";
-            header("location: profile.php");
+            
+//            header("location: profile.php");
         } else {
             echo "Error: " . mysqli_error($dbc);
         }
@@ -103,21 +130,53 @@ echo $username;
             <div class="form-group">
               <label for="exampleInputEmail1">Photo</label><br>
               <input type="file" name="myimage" class="btn btn-info btn-fill btn"> </div>
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="e.g. Juan"> </div>
+            <div class="form-row">
+                <div class="col">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" name="firstname" value="<?php if (isset($_POST['firstname']) && !$flag) echo $_POST['firstname']; ?>" id="inlineFormInput" placeholder="Juan">
+                </div>
+                <div class="col">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" name="lastname" value="<?php if (isset($_POST['lastname']) && !$flag) echo $_POST['lastname']; ?>" id="inlineFormInput" placeholder="Dela Cruz">
+                </div>
+            </div>
+              
             <div class="form-group">
               <label>Age</label>
               <input type="number" class="form-control" name="age" value="<?php if (isset($_POST['age']) && !$flag) echo $_POST['age']; ?>" placeholder="e.g. 19"> </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
               <input type="text" class="form-control" name="description" value="<?php if (isset($_POST['description']) && !$flag) echo $_POST['description']; ?>" id="inlineFormInput" placeholder="e.g. Write a witty description about yourself"> </div>
+<!--
             <div class="form-group">
               <label for="exampleInputEmail1">Interest 1</label>
               <input type="text" class="form-control" name="interest1" value="<?php if (isset($_POST['interest1']) && !$flag) echo $_POST['interest1']; ?>" id="inlineFormInput" placeholder="e.g. Studying"> </div>
+-->
             <input type='submit' name='update' class='btn btn-primary btn-fill' value='Update Profile'/> 
           </div>
           <div class="col-md-4">
+              <h4> Interests </h4>
+              <div class="form-group">
+                <label>Favorite food</label>
+                <input type="text" class="form-control" name="interest1" value="<?php if (isset($_POST['interest1']) && !$flag) echo $_POST['interest1']; ?>" id="inlineFormInput" placeholder="e.g. Ramen">
+              </div>
+              <div class="form-group">
+                <label>Favorite movie</label>
+                <input type="text" class="form-control" name="interest2" value="<?php if (isset($_POST['interest2']) && !$flag) echo $_POST['interest2']; ?>" id="inlineFormInput" placeholder="e.g. Star Wars">
+              </div>
+              <div class="form-group">
+                <label>Favorite artist</label>
+                <input type="text" class="form-control" name="interest3" value="<?php if (isset($_POST['interest3']) && !$flag) echo $_POST['interest3']; ?>" id="inlineFormInput" placeholder="e.g. Mark Hamill">
+              </div>
+              <div class="form-group">
+                <label>Favorite song</label>
+                <input type="text" class="form-control" name="interest4" value="<?php if (isset($_POST['interest4']) && !$flag) echo $_POST['interest4']; ?>" id="inlineFormInput" placeholder="e.g. USSR Anthem">
+              </div>
+              <div class="form-group">
+                <label>Favorite video game</label>
+                <input type="text" class="form-control" name="interest5" value="<?php if (isset($_POST['interest5']) && !$flag) echo $_POST['interest5']; ?>" id="inlineFormInput" placeholder="e.g. Battlefront II">
+              </div>
+<!--
             <div class="row">
               <div class="col-md-12">
                 <table class="table">
@@ -126,6 +185,7 @@ echo $username;
                     <tr>
                       <th>Interests</th>
                     </tr>
+-->
                     <!--?php
                     $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM 'mydb.user-preferences' where ID='1'";
                    
@@ -181,9 +241,11 @@ echo $username;
                       <td>
                         <input name="i10" type="text" value="'.$row['interest10'].'"> </td>
                     </tr>-->
+<!--
                   </tbody>
                 </table>
               </div>
+-->
             </div>
           </div>
         </div>
