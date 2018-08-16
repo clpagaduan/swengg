@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root','password','mydb');
+$dbc=mysqli_connect('localhost','root',null,'swengg');
 
 if (!$dbc) {
  die('Could not connect: '.mysql_error());
