@@ -96,7 +96,7 @@
                   
                   $msg=$record['message'];
               echo"
-            <a href=\"messages.php?id=$ruserid;\" class=\"nav-link active\">
+            <a href=\"messages.php?rid=$ruserid\" class=\"nav-link active\">
             <div class=\"btn\" align=\"left\" >
               <h4 align=\"left\">$ruser</h4>
               <p align=\"left\">$msg</p>
