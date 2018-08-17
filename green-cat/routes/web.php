@@ -11,19 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
 //Green-Cat Application Routes
 //Prepared by: John Edel B. Tamani
-Route::resource('login','LoginController');
+Route::resource('/','LoginController');
 Route::resource('swipematch','SwipeMatchController');
+Route::resource('signup','SignUpController');
 
 
 Auth::routes();
