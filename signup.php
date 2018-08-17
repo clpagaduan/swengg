@@ -16,7 +16,7 @@
 
 <body>
     <?php
-    $dbc=mysqli_connect('localhost','root',null,'mydb');
+    $dbc=mysqli_connect('localhost','root','password','mydb');
     $flag=0;
 $cn=$ca=$cnum=$cea=$cfn=$cln=$crnum=$cra=$un=$pw=$crea=NULL;
 $empties=$invalid=0;

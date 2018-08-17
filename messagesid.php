@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',null,'mydb');
+$dbc=mysqli_connect('localhost','root','password','mydb');
 
 $username = $_SESSION['username'];
    $messagerec =$_SESSION['messagerec'];

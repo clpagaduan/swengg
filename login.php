@@ -11,7 +11,7 @@
     <?php
     session_start();
     
-    $dbc=mysqli_connect('localhost','root',null,'mydb');
+    $dbc=mysqli_connect('localhost','root','password','mydb');
     
     $flag=0;
     $message=null;
@@ -34,7 +34,7 @@
             
             if ($count == 1){
                 $_SESSION['username'] = $username;
-                header("location: profile.php");
+                header("location: profileEdit.php");
             } else {
                 echo "Error: " . mysqli_error($dbc);
             }
