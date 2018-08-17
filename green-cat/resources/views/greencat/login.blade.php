@@ -28,7 +28,7 @@
                   <input type="password" name="password" class="form-control"> </div>
                 <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login
                   </button><br> <br>
-                  Not yet registered? <a href={{route('signup@index')}}> Sign up now!</a><br>
+                  Not yet registered? <a href='/signup'> Sign up now!</a><br>
                   <a href="">Admin</a>
             </div>
           </div>
