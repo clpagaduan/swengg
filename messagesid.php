@@ -18,6 +18,23 @@ if (!$dbc) {
 
 }
 
+
+
+
+
+
+
+
+
+
+?>
+
+  
+  
+  
+  <?php
+
+
 $sql = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($dbc, $sql);
     while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -34,25 +51,14 @@ $sql = "SELECT * FROM users WHERE username='$username'";
       
 //    echo $photo;
 //    echo 'username1: '. $username1;
-    };
+    }; 
+
+
 
 $id=$userID;
-$rid=$messagerec;
 $user=$username;
-
-
-
-
-
-
-?>
-
-  
-  
-  
-  <?php
-
-$query="SELECT * from s_chat_messages ORDER BY whenn DESC";
+ $rid =$_SESSION['messagerec'];
+$query="SELECT * from s_chat_messages where id ='$id' and rid ='$rid' ORDER BY whenn DESC ";
 $result = mysqli_query($dbc, $query);
 while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 if($row['id']==$id){

@@ -34,11 +34,13 @@ $sql = "SELECT * FROM users WHERE username='$username'";
       
 //    echo $photo;
 //    echo 'username1: '. $username1;
-    };
+    }; 
 
 $id=$userID;
-$rid=$messagerec;
 $user=$username;
+$rid=$_GET['rid'];
+
+$_SESSION['messagerec'] =$rid;
 
 
 if (isset($_POST['submit'])){
@@ -149,13 +151,16 @@ $query="INSERT INTO s_chat_messages (chatID,id,rid,user,message,whenn) VALUES (N
                 
               
             </div>
-             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <?php echo"
+             <form action=\"messages.php?rid=$rid\" method=\"post\">" ?>
+
             <div class="col">
               <div class="row">
                
                 <div class="col-md-9">
                   <input type="msg" class="form-control" id="pwd" style="opacity: 0.5;" placeholder="enter message here"name="txt" required> </div>
                 <div class="col-md-3" align="right">
+                     <input type = "hidden" name ="recid" class="" value="<?php echo $id;?>"> 
                       <button class="btn btn-primary btn-block"  type="submit" name="submit" >Send
 
                     </button>
