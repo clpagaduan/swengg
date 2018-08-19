@@ -11,8 +11,15 @@ class AuthenticateLoginUserController extends Controller
 {
     public function authenticate(Request $request){
         $credentials = $request->only('username', 'password');
+        $response = "";
         if (Auth::attempt($credentials)) {
-            return redirect('swipematch');
+            $response = "success";
+        }else{
+            $response = "error";
         }
+
+        return response()->json([
+            "response"=>$response,
+        ]);
     }
 }
