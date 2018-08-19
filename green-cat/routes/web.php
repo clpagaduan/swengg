@@ -26,7 +26,7 @@ Route::post('signupRegistration','ProcessSignUpController@process');
 Route::get('logout', 'LogoutUserController@logout');
 
 //Group controllers
-Route::middleware(['CheckLoginRoute'])->group(function () {
+Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('/','LoginController');
     Route::resource('signup','SignUpController');
 });
