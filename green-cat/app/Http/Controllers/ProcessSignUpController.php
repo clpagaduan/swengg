@@ -10,6 +10,7 @@ use Hash;
 class ProcessSignUpController extends Controller
 {
     public function process(Request $request){
+        
         $date = new DateTime;
         $user = new User();
         $user->username = $request->username;
@@ -25,8 +26,14 @@ class ProcessSignUpController extends Controller
         $user->image = null;
         $user->save();
 
+        $credentials = $request->only($username, $password);
+        $response = "";
+        if (Auth::attempt($credentials)) {
+            $response = "success";
+        }
+
         return response()->json([
-            'user'=>$user,
+            "response"=>$response,
         ]);
     }
 }
