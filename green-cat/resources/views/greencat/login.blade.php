@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html>
-   @if (Auth::check()) 
-   {{ Auth::user()->name}}
-   @else
-   wtf
-   @endif
    <head>
       <meta charset="utf-8">
       <meta name="_token" content="{!! csrf_token() !!}">
