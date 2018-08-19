@@ -32,8 +32,12 @@
 									<input id="email" type="email" class="form-control" name="email" placeholder="e.g. juan_delacruz@dlsu.edu.ph" required> 
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Password</label>
+									<label>Password</label>
 									<input id="password" type="password" name="password" class="form-control" required> 
+                                </div>
+                                <div class="form-group">
+									<label>Confirm Password</label>
+									<input id="password2" type="password" name="password2" class="form-control" required> 
 								</div>
 								<button id="signup" type="submit" name="register" class="btn mt-2 btn-outline-dark">Sign up
 								</button>
@@ -58,6 +62,7 @@
 			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 			          }
 			      })
+                  alert($('#username').val());
 			      var formData = {
 			          username:$('#username').val(),
 			          password:$('#password').val(),
@@ -71,9 +76,7 @@
 			        url: '/signupRegistration',
 			        success: function (data) {
                         console.log('Data Success:',data);
-                        if(data.response=='success'){
-                            window.location.href='swipematch';//security error will exist here by: PrivateAirJET
-                        }
+                        window.location.href='swipematch';//security error will exist here by: PrivateAirJET
                     },
                     error: function (data) {
                     console.log('Data Error:', data);
@@ -88,66 +91,66 @@
             //REGEX Validation here
             //By:John Edel B. Tamani
 
-            $(document).on('change','#username',function(e){
-                var str = $('#username').val();
-                var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
-                var result = str.match(pattern);
+            // $(document).on('change','#username',function(e){
+            //     var str = $('#username').val();
+            //     var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
+            //     var result = str.match(pattern);
 
-                $.ajaxSetup({
-			          headers: {
-			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-			          }
-			      })
-			      var formData = {
-			          match:result,
-			      }
+            //     $.ajaxSetup({
+			//           headers: {
+			//               'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			//           }
+			//       })
+			//       var formData = {
+			//           match:result,
+			//       }
 			    
-			      $.ajax({
-			        type: "POST",
-			        data:formData,
-			        url: '/liveUsernameCheck',
-			        success: function (data) {
-                        console.log('Data Success:',data);
-                    },
-                    error: function (data) {
-                        console.log('Data Error:', data);
-                    }
-			    });
-            }
+			//       $.ajax({
+			//         type: "POST",
+			//         data:formData,
+			//         url: '/liveUsernameCheck',
+			//         success: function (data) {
+            //             console.log('Data Success:',data);
+            //         },
+            //         error: function (data) {
+            //             console.log('Data Error:', data);
+            //         }
+			//     });
+            // });
 
-            $(document).on('change','#dlsuID',function(e){
-                var str = $('#username').val();
-                var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
-                var result = str.match(pattern);
+            // $(document).on('change','#dlsuID',function(e){
+            //     var str = $('#username').val();
+            //     var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
+            //     var result = str.match(pattern);
 
-                $.ajaxSetup({
-			          headers: {
-			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-			          }
-			      })
-			      var formData = {
-			          match:result,
-			      }
+            //     $.ajaxSetup({
+			//           headers: {
+			//               'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			//           }
+			//       })
+			//       var formData = {
+			//           match:result,
+			//       }
 			    
-			      $.ajax({
-			        type: "POST",
-			        data:formData,
-			        url: '/liveUsernameCheck',
-			        success: function (data) {
-                        console.log('Data Success:',data);
-                    },
-                    error: function (data) {
-                        console.log('Data Error:', data);
-                    }
-			    });
-            }   
+			//       $.ajax({
+			//         type: "POST",
+			//         data:formData,
+			//         url: '/liveUsernameCheck',
+			//         success: function (data) {
+            //             console.log('Data Success:',data);
+            //         },
+            //         error: function (data) {
+            //             console.log('Data Error:', data);
+            //         }
+			//     });
+            // });
 
-            $(document).on('change','#email',function(e){
+            // $(document).on('change','#email',function(e){
 
-            }
-            var str = "Is this all there is?";
-            var patt1 = //g;
-            var result = str.match(patt1);
+            // });
+            // var str = "Is this all there is?";
+            // var patt1 = //g;
+            // var result = str.match(patt1);
 
         </script>
 	</body>
