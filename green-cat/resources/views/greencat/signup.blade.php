@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-@if (Auth::check()) 
- 
-@endif
 <html>
 	<head>
     <meta charset="utf-8">
