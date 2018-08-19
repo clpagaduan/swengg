@@ -22,9 +22,9 @@ class CheckLoginRoute
             //Case: If return view('page').
             //Solution: Use return response()->view('page')
             //Problem: Will load to the current route. 
-
             return redirect('swipematch');
-        } 
+        }
+
         return $next($request);
     }
 }
