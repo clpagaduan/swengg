@@ -10,7 +10,14 @@ use Hash;
 class ProcessSignUpController extends Controller
 {
     public function process(Request $request){
-        
+        //Validation Section Here
+        //By: PrivateAirJET
+        // $username = User::where('username','=',$request->username)->first();
+        // $username = User::where('username','=',$request->username)->first();
+        // if(isset())
+
+        //Creation of New Object Here
+        //By: PrivateAirJET
         $date = new DateTime;
         $user = new User();
         $user->username = $request->username;
@@ -26,6 +33,8 @@ class ProcessSignUpController extends Controller
         $user->image = null;
         $user->save();
 
+        //Login the new user account here
+        //By: PrivateAirJET
         $credentials = $request->only($username, $password);
         $response = "";
         if (Auth::attempt($credentials)) {
