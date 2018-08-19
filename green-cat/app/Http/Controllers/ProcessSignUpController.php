@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use DateTime;
 use Hash;
+use Auth;
 
 class ProcessSignUpController extends Controller
 {
@@ -35,14 +36,6 @@ class ProcessSignUpController extends Controller
 
         //Login the new user account here
         //By: PrivateAirJET
-        $credentials = $request->only($username, $password);
-        $response = "";
-        if (Auth::attempt($credentials)) {
-            $response = "success";
-        }
-
-        return response()->json([
-            "response"=>$response,
-        ]);
+        Auth::login($user);
     }
 }
