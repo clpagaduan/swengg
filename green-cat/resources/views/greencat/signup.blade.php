@@ -82,6 +82,73 @@
 			  }
 			  return false;
 			});
-		</script>
+        </script>
+
+        <script type="text/javascript">
+            //REGEX Validation here
+            //By:John Edel B. Tamani
+
+            $(document).on('change','#username',function(e){
+                var str = $('#username').val();
+                var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
+                var result = str.match(pattern);
+
+                $.ajaxSetup({
+			          headers: {
+			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			          }
+			      })
+			      var formData = {
+			          match:result,
+			      }
+			    
+			      $.ajax({
+			        type: "POST",
+			        data:formData,
+			        url: '/liveUsernameCheck',
+			        success: function (data) {
+                        console.log('Data Success:',data);
+                    },
+                    error: function (data) {
+                        console.log('Data Error:', data);
+                    }
+			    });
+            }
+
+            $(document).on('change','#dlsuID',function(e){
+                var str = $('#username').val();
+                var pattern = /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/g;
+                var result = str.match(pattern);
+
+                $.ajaxSetup({
+			          headers: {
+			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			          }
+			      })
+			      var formData = {
+			          match:result,
+			      }
+			    
+			      $.ajax({
+			        type: "POST",
+			        data:formData,
+			        url: '/liveUsernameCheck',
+			        success: function (data) {
+                        console.log('Data Success:',data);
+                    },
+                    error: function (data) {
+                        console.log('Data Error:', data);
+                    }
+			    });
+            }   
+
+            $(document).on('change','#email',function(e){
+
+            }
+            var str = "Is this all there is?";
+            var patt1 = //g;
+            var result = str.match(patt1);
+
+        </script>
 	</body>
 </html>
