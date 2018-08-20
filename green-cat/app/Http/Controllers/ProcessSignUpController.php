@@ -7,6 +7,7 @@ use App\User;
 use DateTime;
 use Hash;
 use Auth;
+use App\UserProfile;
 
 class ProcessSignUpController extends Controller
 {
@@ -33,6 +34,19 @@ class ProcessSignUpController extends Controller
         $user->daily_back = 0;
         $user->image = null;
         $user->save();
+
+        $detail = new UserProfile();
+        $detail->userID = $user->id;
+        $detail->photo = null;
+        $detail->first_name= null;
+        $detail->last_name= null;
+        $detail->age= null;
+        $detail->description= null;
+        $detail->interest1= null;
+        $detail->interest2= null;
+        $detail->created_at= $date->getTimestamp();
+        $detail->updated_at= $date->getTimestamp();
+        $detail->save();
 
         //Login the new user account here
         //By: PrivateAirJET
