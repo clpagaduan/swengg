@@ -84,13 +84,13 @@
     <div class="row match-swipe-top-box">
         <div class="row" style="height:70%; width:100%; margin:auto;">
             <div class="col-lg-4" style="padding-left:0; padding-right:0; margin:auto;">
-                <img style="float:left;" src="{{ URL::asset('images/account.png')}}" alt="Image Not Found" width=20% height=60%/>
+                <a href="profile"><img style="float:left;" src="{{ URL::asset('images/account.png')}}" alt="Image Not Found" width=20% height=60%/></a>
             </div>
             <div class="col-lg-4" style="padding-left:0; padding-right:0; margin:auto;">
                 <img style="display: block; margin-left:auto; margin-right:auto;" src="{{ URL::asset('images/greencat.png')}}" alt="Image Not Found" width=50% height=80%/>
             </div>
             <div class="col-lg-4" style="padding-left:0; padding-right:0; margin:auto;">
-                <img style="float:right;" src="{{ URL::asset('images/conversation.png')}}" alt="Image Not Found" width=20% height=60%/>
+                <a href="message"><img style="float:right;" src="{{ URL::asset('images/conversation.png')}}" alt="Image Not Found" width=20% height=60%/></a>
             </div>
         </div>
     </div>
@@ -133,7 +133,7 @@
                 <img id="back" style="display: block; margin-left:auto; margin-right:auto;" src="{{ URL::asset('images/back.png')}}" alt="Image Not Found" width=20% height=60%/>
             </div>
             <div class="col-lg-4" style="padding-left:0; padding-right:0; margin:auto;">
-                <img id="home" style="display: block; margin-left:auto; margin-right:auto;" src="{{ URL::asset('images/home.png')}}" alt="Image Not Found" width=20% height=60%/>
+                <a href="profile"><img id="home" style="display: block; margin-left:auto; margin-right:auto;" src="{{ URL::asset('images/home.png')}}" alt="Image Not Found" width=20% height=60%/></a>
             </div>
             <div class="col-lg-4" style="padding-left:0; padding-right:0; margin:auto;">
                 <img id="like" style="display: block; margin-left:auto; margin-right:auto;" src="{{ URL::asset('images/like.png')}}" alt="Image Not Found" width=20% height=60%/>
