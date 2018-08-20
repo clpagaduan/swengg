@@ -18,7 +18,6 @@ Auth::routes();
 //Prepared by: John Edel B. Tamani
 
 //Core Controllers
-Route::resource('swipematch','SwipeMatchController');
 
 //Logical Controllers
 Route::post('loginAuthenticate','AuthenticateLoginUserController@authenticate');
@@ -29,4 +28,10 @@ Route::get('logout', 'LogoutUserController@logout');
 Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('/','LoginController');
     Route::resource('signup','SignUpController');
+});
+
+Route::middleware(['AccessAuthRoutes'])->group(function (){
+    Route::resource('swipematch','SwipeMatchController');
+    Route::resource('profile','ProfileController');
+    Route::resource('message','MessageController');
 });
