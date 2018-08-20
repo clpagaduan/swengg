@@ -9,7 +9,6 @@
 		<link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
 	</head>
 	<body>
-		<form action="profileEdit.php" method="post">
 			<div class="py-3">
 				<div class="container">
 					<div class="row">
@@ -59,16 +58,16 @@
 								<center>
 								</center>
 							</div>
-							<div class="card-body">
+							{{-- <div class="card-body">
 								<h5 class="card-title">
 								</h5>
 								<p class="card-text">About me: @if(isset(Auth::user()->description)) {{Auth::user()->description}} @else N/A @endif <br>
 								<p class="card-text">Interests: 
 									<br>
 								</p>
-							</div>
+							</div> --}}
 							<div class="card-footer">
-                                <a href="editprofile"><button class="btn btn-primary" name="submit">Edit Profile</button></a>
+                                <a href="profile/{{Auth::user()->id}}"><button class="btn btn-primary" name="submit">View Profile</button></a>
 								<br> 
 							</div>
 						</div>
@@ -79,6 +78,5 @@
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 			</div>
-		</form>
 	</body>
 </html>
