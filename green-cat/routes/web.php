@@ -22,6 +22,7 @@ Auth::routes();
 //Logical Controllers
 Route::post('loginAuthenticate','AuthenticateLoginUserController@authenticate');
 Route::post('signupRegistration','ProcessSignUpController@process');
+Route::post('editUserProfile','EditUserProfileController@process');
 Route::get('logout', 'LogoutUserController@logout');
 
 //Group controllers
