@@ -42,7 +42,7 @@
 								<button id="signup" type="submit" name="register" class="btn mt-2 btn-outline-dark">Sign up
 								</button>
 								<br><br>
-								Already have an existing account? <a href='/login'>Log in here.</a>
+								Already have an existing account? <a href='/'>Log in here.</a>
 							</div>
 						</div>
 					</div>
