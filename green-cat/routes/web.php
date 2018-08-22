@@ -16,11 +16,23 @@ Auth::routes();
 
 //Green-Cat Application Routes
 //Prepared by: John Edel B. Tamani
-Route::resource('/','LoginController');
-Route::resource('swipematch','SwipeMatchController');
-Route::resource('signup','SignUpController');
 
+//Core Controllers
 
-Auth::routes();
+//Logical Controllers
+Route::post('loginAuthenticate','AuthenticateLoginUserController@authenticate');
+Route::post('signupRegistration','ProcessSignUpController@process');
+Route::post('editUserProfile','EditUserProfileController@process');
+Route::get('logout', 'LogoutUserController@logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Group controllers
+Route::middleware(['CheckLoginRoute'])->group(function (){
+    Route::resource('/','LoginController');
+    Route::resource('signup','SignUpController');
+});
+
+Route::middleware(['AccessAuthRoutes'])->group(function (){
+    Route::resource('swipematch','SwipeMatchController');
+    Route::resource('profile','ProfileController');
+    Route::resource('message','MessageController');
+});

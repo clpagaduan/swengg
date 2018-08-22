@@ -11,49 +11,6 @@
   <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
 
 <body>
-    <?php
-        if(!isset($_SESSION)){
-        session_start();
-
-    $username = $_SESSION['username'];
-//    echo 'username: '. $username; 
-    }
-    require_once('mysql_connect.php');
-    
-    $sql = "SELECT * FROM users WHERE username='$username'";
-    $result = mysqli_query($dbc, $sql);
-    while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-    
-        $username1 = $record['username'];
-        $fname = $record['firstname'];
-        $sname = $record['lastname'];
-        $dlsuID = $record['dlsuID'];
-        $age = $record['age'];
-        $description = $record['description'];
-        $rawPhoto = $record['photo'];
-        $photo = '<img src="data:image/jpeg;base64,'.base64_encode($rawPhoto).'"style="width:300px;height:300px"/>';
-//    echo $photo;
-//    echo 'username1: '. $username1;
-    };
-    
-    $queryID = "SELECT id from mydb.users WHERE username = '$username'";      
-        $resultID=mysqli_query($dbc,$queryID);
-        $row = mysqli_fetch_array($resultID, MYSQLI_ASSOC);
-        $userID = $row['id'];
-        echo 'user id: ' . $userID;
-    
-    $queryInterest = "SELECT * FROM userpreferences WHERE userID = '$userID'";
-    $resultInterest = mysqli_query($dbc, $queryInterest);
-    while ($record1 = mysqli_fetch_array($resultInterest, MYSQLI_ASSOC)){
-        $interest1 = $record1['interest1'];
-        $interest2 = $record1['interest2'];
-        $interest3 = $record1['interest3'];
-        $interest4 = $record1['interest4'];
-        $interest5 = $record1['interest5'];
-    }
-    
-    ?>
-    
   <form action="profileEdit.php" method="post">
     <div class="py-3">
       <div class="container">
@@ -101,18 +58,18 @@
           <div class="col-md-4 justify-content-center">
             <div class="card">
                 <div class="card"><center>
-                    <?php echo $photo;?> </center>
+                 </center>
                 </div>
                 
                 <div class="card-body">
                     <h5 class="card-title">
-                      <?php echo $fname . ' ' .$sname . ', '.$age. ' <br> ' .$dlsuID ;?>
+                   
                       </h5>
-                    <p class="card-text">About me: <br><?php echo $description;?></p>
+                    <p class="card-text">About me: <br>
                     
                     <p class="card-text">Interests: 
                         <br>
-                        <?php echo $interest1 . ', ' .$interest2. ', ' .$interest3. ', ' .$interest4. ', ' .$interest5;?>
+                       
                     </p>
                     
                 </div>
@@ -123,84 +80,13 @@
                 </div>
             </div>
           </div>
-<!--
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12"> 
-                <table class="table">
-                  <tbody>
-                    <tr> </tr>
-                    <tr>
-                      <th>Interests</th>
-                    </tr>
--->
-                    <!--?php
-                    $query = "SELECT interest1,interest2,interest3,interest4,interest5,interest6,interest7,interest8,interest9,interest10 FROM mydb.userpreferences where ID=1";
-                   
- $result=mysqli_query($dbc,$query);
-                    if (!$result) {
-    printf("Error: %s\n", mysqli_error($dbc));
-    exit();
-}
-            
-                  
-                    while($row = mysqli_fetch_array($result)) {
-                   
-	               
-                    echo '
-                  <tr-->
-<!--
-                    <tr>
-                      <td>'.$row['interest1'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest2'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest3'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest4'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest5'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest6'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest7'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest8'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest9'].'</td>
-                    </tr>
-                    <tr>
-                      <td>'.$row['interest10'].'</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
--->
-<!--            </div>-->
-<!--          </div>-->
-        </div>
       </div>
         <?php  ?>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!--      <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">-->
-<!--      <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"> -->
       </div>
   </form>
-<!--
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
--->
 </body>
 
 </html>
