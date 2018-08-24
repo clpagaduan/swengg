@@ -13,7 +13,7 @@ class AuthenticateLoginUserController extends Controller
         $credentials = $request->only('username', 'password');
         $response = "";
         if (Auth::attempt($credentials)) {
-            if(Auth::user()->account_flag=0){
+            if(Auth::user()->account_flag==0){
                 $response = "not-verified";
             }else{
                 $response = "success";

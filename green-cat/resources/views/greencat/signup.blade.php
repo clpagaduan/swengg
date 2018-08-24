@@ -69,7 +69,6 @@
 							'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 						}
 					})
-					alert($('#username').val());
 					var formData = {
 						username:$('#username').val(),
 						password:$('#password').val(),
@@ -84,7 +83,7 @@
 						url: '/signupRegistration',
 						success: function (data) {
 							console.log('Data Success:',data);
-							window.location.href='login';
+							window.location.href='/';
 							// window.location.href='swipematch';//security error will exist here by: PrivateAirJET
 						},
 						error: function (data) {
