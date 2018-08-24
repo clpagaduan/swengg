@@ -77,7 +77,7 @@ if (isset($_POST['inactive'])){
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">
+              <a class="nav-link disabled" href="adminDashboard.php">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
@@ -90,11 +90,7 @@ if (isset($_POST['inactive'])){
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
-            <li class="nav-item">
-              <a href="messages.php" class="nav-link disabled">
-                <i class="fa fa-fw fa-inbox"></i>Add Preferences &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <br> </a>
-            </li>
+     
             <li class="nav-item">
               <a class="nav-link disabled" href="login.php">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>

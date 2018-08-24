@@ -74,7 +74,7 @@ if (isset($_POST['no'])){
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="#" class="nav-link disabled">
+              <a href="adminDashboard.php" class="nav-link disabled">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
@@ -87,11 +87,7 @@ if (isset($_POST['no'])){
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="messages.php">
-                <i class="fa fa-fw fa-inbox"></i>Add Preferences &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <br> </a>
-            </li>
+    
             <li class="nav-item">
               <a class="nav-link disabled" href="login.php">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>

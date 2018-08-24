@@ -24,16 +24,16 @@
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="#" class="nav-link disabled">
+              <a href="#" class="nav-link active">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="profile.php">
-                <i class="fa fa-user fa-fw"></i>Verify Accounts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <i class="fa fa-user fa-fw"></i>Verify Accounts
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="browse.html" class="nav-link active">
+              <a href="browse.html" class="nav-link disabled">
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
@@ -48,29 +48,7 @@
             </li>
           </ul>
         </div>
-        <div class="justify-content-center col-md-4">
-          <div class="row">
-            <div class="col-md-12">
-              <a href="#" class="btn btn-outline-primary">Back
-                <br> </a>
-            </div>
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" alt="Card image cap">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">ID Number: 11412345</li>
-              <li class="list-group-item">Name: Espiritu, Dennis Paolo</li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">Username: dennis_espiritu</li>
-              <li class="list-group-item">DLSU Mail: dennis_espiritu@dlsu.edu.ph</li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">Date joined: 2018-07-21 18:39:00</li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">Last signed in: 2018-08:22 20:00:00</li>
-            </ul>
-            <div class="card-body">
-              <a class="btn btn-primary" href="#">Suspend</a>
-              <a href="#" class="btn btn-outline-primary">Activate</a>
-            </div>
-          </div>
-        </div>
+        <div class="justify-content-center col-md-8"></div>
       </div>
     </div>
   </div>
@@ -82,9 +60,7 @@
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
 -->
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
-  </pingendo>
+
 </body>
 
 </html>
