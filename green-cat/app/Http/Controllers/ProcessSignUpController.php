@@ -22,6 +22,8 @@ class ProcessSignUpController extends Controller
         //By: PrivateAirJET
         $date = new DateTime;
         $user = new User();
+        $user->account_flag = 0;
+        $user->account_flag2 = 0;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
