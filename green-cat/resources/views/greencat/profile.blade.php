@@ -39,7 +39,7 @@
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="login.php">
+              <a class="nav-link disabled" href="/logout">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>
             </li>
           </ul>

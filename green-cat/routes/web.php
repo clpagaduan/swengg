@@ -26,10 +26,11 @@ Route::post('editUserProfile','EditUserProfileController@process');
 Route::get('logout', 'LogoutUserController@logout');
 
 //Group controllers
-Route::middleware(['CheckLoginRoute'])->group(function (){
-  
-});
+// Route::middleware(['CheckLoginRoute'])->group(function (){
+// });
 
+//Integrated in one route here
+//By: PrivateAirJET
 Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('swipematch','SwipeMatchController');
     Route::resource('profile','ProfileController');
