@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'CheckLoginRoute'=>\App\Http\Middleware\CheckLoginRoute::class,
         'AccessAuthRoutes'=>\App\Http\Middleware\AccessAuthRoutes::class,
+        'BackLogin'=>\App\Http\Middleware\AccessAuthRoutes::class,
     ];
 }
