@@ -16,7 +16,7 @@ class CheckLoginRoute
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()){   
+        if(Auth::user()){   
             //Fixed Error: Call to a member function setCookie() on null
             //By: PrivateAirJET 
             //Case: If return view('page').
@@ -29,7 +29,7 @@ class CheckLoginRoute
             }else{
                 return redirect('swipematch');
             }
-        }else{
+        }elseif(!Auth::user()){
             return redirect('/');
         }
 

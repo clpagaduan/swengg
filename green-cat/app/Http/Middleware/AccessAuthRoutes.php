@@ -18,6 +18,12 @@ class AccessAuthRoutes
     {
         if (!Auth::user()) {  
             return redirect('/');
+        }else{
+            if(Auth::user()->account_flag2==0){
+                return redirect('profile/'.Auth::user()->id);
+            }else{
+                return redirect('swipematch');
+            }
         }
         return $next($request);
     }

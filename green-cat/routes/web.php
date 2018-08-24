@@ -24,14 +24,13 @@ Route::post('loginAuthenticate','AuthenticateLoginUserController@authenticate');
 Route::post('signupRegistration','ProcessSignUpController@process');
 Route::post('editUserProfile','EditUserProfileController@process');
 Route::get('logout', 'LogoutUserController@logout');
-Route::resource('/','LoginController');
-Route::resource('signup','SignUpController');
-//Group controllers
-// Route::middleware(['CheckLoginRoute'])->group(function (){
-// });
 
-//Integrated in one route here
-//By: PrivateAirJET
+//Group controllers
+Route::middleware(['AccessAuthRoutes'])->group(function (){
+    Route::resource('/','LoginController');
+    Route::resource('signup','SignUpController');
+});
+
 Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('swipematch','SwipeMatchController');
     Route::resource('profile','ProfileController');
