@@ -24,22 +24,18 @@
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="userDashboard.html" class="nav-link disabled">
-                <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="userViewProfile.html">
+              <a class="nav-link active" href="profile/{{Auth::user()->id}}">
                 <i class="fa fa-user fa-fw"></i>Profile &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="userBrowse.html" class="nav-link disabled">
+              <a href="swipematch" class="nav-link disabled">
                 <i class="fa fa-fw fa-search"></i>Browse &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="userMessages.html">
-                <i class="fa fa-fw fa-inbox"></i>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <a class="nav-link disabled" href="user-match">
+                <i class="fa fa-fw fa-inbox"></i>Matches &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
