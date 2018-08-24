@@ -27,12 +27,13 @@ Route::get('logout', 'LogoutUserController@logout');
 
 //Group controllers
 Route::middleware(['CheckLoginRoute'])->group(function (){
-    Route::resource('/','LoginController');
-    Route::resource('signup','SignUpController');
+  
 });
 
-Route::middleware(['AccessAuthRoutes'])->group(function (){
+Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('swipematch','SwipeMatchController');
     Route::resource('profile','ProfileController');
     Route::resource('message','MessageController');
+    Route::resource('/','LoginController');
+    Route::resource('signup','SignUpController');
 });

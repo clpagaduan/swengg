@@ -29,6 +29,8 @@ class CheckLoginRoute
             }else{
                 return redirect('swipematch');
             }
+        }else{
+            return redirect('/');
         }
 
         return $next($request);
