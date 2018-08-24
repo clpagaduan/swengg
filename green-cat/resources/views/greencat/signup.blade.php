@@ -39,6 +39,10 @@
 									<label>Confirm Password</label>
 									<input id="password2" type="password" name="password2" class="form-control" required> 
 								</div>
+								<div class="form-group">
+									<label>Upload School ID for Verification</label>
+									<input type="file" id="schoolID">
+								</div>
 								<button id="signup" type="submit" name="register" class="btn mt-2 btn-outline-dark">Sign up
 								</button>
 								<br><br>
@@ -57,36 +61,43 @@
 			$(document).on('click','#signup',function(e){
 			  var verify = confirm('Do you want to add this user?')
 			  if(verify==true){
-			      $.ajaxSetup({
-			          headers: {
-			              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-			          }
-			      })
-                  alert($('#username').val());
-			      var formData = {
-			          username:$('#username').val(),
-			          password:$('#password').val(),
-			          dlsuID:$('#dlsuID').val(),
-			          email:$('#email').val(),
-			      }
-			    
-			      $.ajax({
-			        type: "POST",
-			        data:formData,
-			        url: '/signupRegistration',
-			        success: function (data) {
-                        console.log('Data Success:',data);
-                        window.location.href='swipematch';//security error will exist here by: PrivateAirJET
-                    },
-                    error: function (data) {
-                    console.log('Data Error:', data);
-                    }
-			    });
+				  if($('#password').val()==$('#password2').val()){
+					//RULES HERE:
+					//1. 
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+						}
+					})
+					alert($('#username').val());
+					var formData = {
+						username:$('#username').val(),
+						password:$('#password').val(),
+						dlsuID:$('#dlsuID').val(),
+						email:$('#email').val(),
+						schoolID:$('#schoolID'),
+					}
+					
+					$.ajax({
+						type: "POST",
+						data:formData,
+						url: '/signupRegistration',
+						success: function (data) {
+							console.log('Data Success:',data);
+							// window.location.href='swipematch';//security error will exist here by: PrivateAirJET
+						},
+						error: function (data) {
+						console.log('Data Error:', data);
+						}
+					});
+				}else{
+					alert('Error Mismatch Password!');
+				}
+				return false;
 			  }
-			  return false;
 			});
-        </script>
-
+		</script>
+		
         <script type="text/javascript">
             //REGEX Validation here
             //By:John Edel B. Tamani
