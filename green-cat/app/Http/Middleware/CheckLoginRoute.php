@@ -22,7 +22,13 @@ class CheckLoginRoute
             //Case: If return view('page').
             //Solution: Use return response()->view('page')
             //Problem: Will load to the current route. 
-            return redirect('swipematch');
+
+            //Checking for the account_flag (For verifcation) is done in the Login Controller
+            if(Auth::user()->account_flag2==0){
+                return redirect('profile'.Auth::user()->id);
+            }else{
+                return redirect('swipematch');
+            }
         }
 
         return $next($request);
