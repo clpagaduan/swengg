@@ -102,7 +102,7 @@ $result=mysqli_query($dbc,$query);
                                echo
                                           "<div class=\"alert alert-info\">
                                             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">×</button>
-                                            <a href=\"employeeManufacturingStatuses.php\"><span aria-hidden=\"true\"><b><font color=\"black\">Accounts - $suspendedacc suspended accounts</b></font></span></a>
+                                            <a href=\"AdminManageAccounts.php\"><span aria-hidden=\"true\"><b><font color=\"black\">Accounts - $suspendedacc suspended accounts</b></font></span></a>
                                         </div>";}
                                 
                                 
@@ -111,7 +111,7 @@ $result=mysqli_query($dbc,$query);
                                   echo
                                           "<div class=\"alert alert-info\">
                                             <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">×</button>
-                                            <a href=\"employeeManufacturingStatuses.php\"><span aria-hidden=\"true\"><b><font color=\"black\">Accounts - $verifiedacc unverified accounts</b></font></span></a>
+                                            <a href=\"adminVerifyAccounts.php\"><span aria-hidden=\"true\"><b><font color=\"black\">Accounts - $verifiedacc unverified accounts</b></font></span></a>
                                         </div>";
                                 }
                                 
