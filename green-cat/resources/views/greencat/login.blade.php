@@ -69,7 +69,7 @@
 					$('#alert-verify').html('Error invalid username or password!');
 					$('#alert-verify').show();
 				}else if (data.response=='not-verified'){
-
+                    alert('Wait for the user to get verified by the administrators!')
                 }
 			},
 			error: function (data) {
