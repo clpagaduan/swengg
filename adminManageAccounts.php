@@ -52,15 +52,13 @@ if (isset($_POST['inactive'])){
 
 
 ?>
-
-
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+  <link rel="stylesheet" href="greencat.css" type="text/css"> </head>
 
 <body>
   <div class="py-3">
@@ -79,25 +77,24 @@ if (isset($_POST['inactive'])){
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="#" class="nav-link disabled">
+              <a class="nav-link disabled" href="#">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="adminVerifyAccounts.php">
+              <a href="adminVerifyAccounts.php" class="nav-link disabled">
                 <i class="fa fa-user fa-fw"></i>Verify Accounts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="adminManageAccounts.php" class="nav-link active">
+              <a class="nav-link active" href="adminManageAccounts.php">
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="messages.php">
+              <a href="messages.php" class="nav-link disabled">
                 <i class="fa fa-fw fa-inbox"></i>Add Preferences &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
-    
             <li class="nav-item">
               <a class="nav-link disabled" href="login.php">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -107,15 +104,23 @@ if (isset($_POST['inactive'])){
         <div class="justify-content-center col-md-8">
           <table class="table">
             <thead>
+             
+             
+             
+             
+             
               <tr>
                 <th>ID Number</th>
                 <th>Username</th>
                 <th>Status</th>
-          
-                <th>  Action</th>
+                <th>Subscription</th>
+ 
+                <th class="">Action</th>
               </tr>
             </thead>
             <tbody>
+             
+             
              <?php 
                 
                 $query="SELECT * FROM hello.`user-status` as us join users as u on u.id = us.id";
@@ -126,18 +131,18 @@ $result=mysqli_query($dbc,$query);
                  $active =$row['active'];
                                                                   
                 $approved =$row['approved'];                                                  
-                 $inactive =$row['inactive'];                             $id =    $row['id'];                                
+                 $inactive =$row['inactive'];                             $id =    $row['id'];                               $type =$row['account_type'];     
                                                                   
                  $idnum =$row['dlsuID'];
                 if($active==1 &&  $approved ==1){
              echo"
              <form action=\"adminManageAccounts.php\" method=\"post\">
               <tr>
-                <td><a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
+                <td><a href=\"adminmanageAccountID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
                 <td>$username</td>
                 <td>Active</td>
-         
-                <td><input type=\"submit\" value=\"Suspend\" name=\"submit\" class=\"btn mt-0 btn-outline-dark\">
+           <td>$type</td>
+                <td><input type=\"submit\" value=\"Suspend\" name=\"submit\" class=\"btn btn-outline-primary\">
                 
                 <input type = \"hidden\" name =\"updateid\" class=\"\" value=\"".$id."\">
                 </td>
@@ -147,11 +152,12 @@ $result=mysqli_query($dbc,$query);
                    else if($inactive==1  &&  $approved ==1){
              echo"<form action=\"adminManageAccounts.php\" method=\"post\">
               <tr>
-                <td><a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
+                <td><a href=\"adminmanageAccountID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
                 <td>$username</td>
                 <td>Inactive</td>
+                <td>$type</td>
        
-                <td><input type=\"submit\" value=\"Activate\" name=\"inactive\" class=\"btn mt-0 btn-outline-dark\">
+                <td><input type=\"submit\" value=\"Activate\" name=\"inactive\" class=\"btn btn-primary\">
                 
                 <input type = \"hidden\" name =\"updateid\" class=\"\" value=\"".$id."\">
                 </td>
@@ -162,9 +168,7 @@ $result=mysqli_query($dbc,$query);
                                                                  }
               ?>
               
-              
-              
-              
+            
             </tbody>
           </table>
         </div>

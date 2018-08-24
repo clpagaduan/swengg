@@ -20,25 +20,29 @@ if (!$dbc) {
 if (isset($_POST['submit'])){
     
     $id=$_POST['updateid'];
-    echo $id;
-    $sql = "UPDATE hello.`user-status` SET  approved = 1 WHERE id = " . $_POST['updateid'];
+    
+    $sql = "UPDATE hello.`user-status` SET active = 0, inactive = 1 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
 }
 
-if (isset($_POST['no'])){
+
+if (isset($_POST['inactive'])){
+    
+    
+    
+    
     
     $id=$_POST['updateid'];
     
-    $sql = "UPDATE hello.`user-status` SET  disapproved = 1 WHERE id = " . $_POST['updateid'];
+    
+    $sql = "UPDATE hello.`user-status` SET active = 1, inactive = 0 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
+    
 }
-
-
-
 
 
 
@@ -48,7 +52,6 @@ if (isset($_POST['no'])){
 
 
 ?>
-
 <html>
 
 <head>
@@ -74,21 +77,21 @@ if (isset($_POST['no'])){
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="#" class="nav-link disabled">
+              <a class="nav-link disabled" href="#">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="adminVerifyAccounts.php">
+              <a href="profile.php" class="nav-link disabled">
                 <i class="fa fa-user fa-fw"></i>Verify Accounts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="adminManageAccounts.php" class="nav-link disabled">
+              <a class="nav-link active" href="browse.html">
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="messages.php">
+              <a href="messages.php" class="nav-link disabled">
                 <i class="fa fa-fw fa-inbox"></i>Add Preferences &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
@@ -101,48 +104,70 @@ if (isset($_POST['no'])){
         <div class="justify-content-center col-md-8">
           <table class="table">
             <thead>
+             
+             
+             
+             
+             
               <tr>
                 <th>ID Number</th>
-                <th>Last Name</th>
-                <th>First Name</th>
+                <th>Username</th>
                 <th>Status</th>
+                <th>Subscription</th>
+ 
+                <th class="">Action</th>
               </tr>
             </thead>
             <tbody>
              
+             
              <?php 
                 
-                $query="SELECT * FROM hello.`user-status` as us join hello.users_details as u on u.userid =us.id join users as ue on ue.id = us.id
-";
+                $query="SELECT * FROM hello.`user-status` as us join users as u on u.id = us.id";
 $result=mysqli_query($dbc,$query);
                 
                 
-             while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $first =$row['first_name'];
-               $last =$row['last_name'];                                                   
-                 $approved =$row['approved'];
-                 $disapproved =$row['disapproved'];                                                 
-                                         $id =    $row['userID'];                                
+             while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $username =$row['username'];
+                 $active =$row['active'];
+                                                                  
+                $approved =$row['approved'];                                                  
+                 $inactive =$row['inactive'];                             $id =    $row['id'];                               $type =$row['account_type'];     
                                                                   
                  $idnum =$row['dlsuID'];
-               if($approved ==0 && $disapproved==0){
+                if($active==1 &&  $approved ==1){
              echo"
-             <form action=\"adminVerifyAccounts.php\" method=\"post\">
+             <form action=\"adminManageAccounts.php\" method=\"post\">
               <tr>
-              
-                <td> <a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
-                <td>$last</td>
-                <td>$first</td>
-         
-                <td><input class=\"btn btn-primary\" type=\"submit\" value=\"Approve\" name=\"submit\" class=\"btn mt-0 btn-outline-dark\">
-                <input class=\"btn btn-outline-primary\" type=\"submit\" value=\"Reject\" name=\"no\" class=\"btn mt-0 btn-outline-dark\">
+                <td><a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
+                <td>$username</td>
+                <td>Active</td>
+           <td>$type</td>
+                <td><input type=\"submit\" value=\"Suspend\" name=\"submit\" class=\"btn btn-outline-primary\">
                 
                 <input type = \"hidden\" name =\"updateid\" class=\"\" value=\"".$id."\">
                 </td>
               </tr>
-                </form>";}} ?>
+                </form>";}
+                                                                 
+                   else if($inactive==1  &&  $approved ==1){
+             echo"<form action=\"adminManageAccounts.php\" method=\"post\">
+              <tr>
+                <td><a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
+                <td>$username</td>
+                <td>Inactive</td>
+                <td>$type</td>
+       
+                <td><input type=\"submit\" value=\"Activate\" name=\"inactive\" class=\"btn btn-primary\">
+                
+                <input type = \"hidden\" name =\"updateid\" class=\"\" value=\"".$id."\">
+                </td>
+              </tr>
+                </form>";}                                                  
+                                                                 
+                                                                 
+                                                                 }
+              ?>
               
-             
-   
             
             </tbody>
           </table>
@@ -150,7 +175,7 @@ $result=mysqli_query($dbc,$query);
       </div>
     </div>
   </div>
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!--

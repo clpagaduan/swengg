@@ -27,7 +27,10 @@ $last =$row['last_name'];
  $username =$row['username'];
      $idnum =$row['dlsuID'];          
 
- $email =$row['email'];       } 
+ $email =$row['email'];  
+   $create =$row['created_at']; 
+       $updated =$row['updated_at']; 
+  } 
 
 ?>
 <html>
@@ -54,17 +57,17 @@ $last =$row['last_name'];
       <div class="row">
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
+           <li class="nav-item">
               <a class="nav-link disabled" href="#">
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
-              <a href="adminVerifyAccounts.php" class="nav-link active">
+              <a href="adminVerifyAccounts.php" class="nav-link disabled">
                 <i class="fa fa-user fa-fw"></i>Verify Accounts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="adminManageAccounts.php">
+              <a class="nav-link active" href="adminManageAccounts.php">
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
@@ -82,26 +85,28 @@ $last =$row['last_name'];
         <div class="justify-content-center col-md-4">
           <div class="row">
             <div class="col-md-12">
-        
+             
             </div>
           </div>
           
-            <?php echo "<div class=\"card\">
+          
+                  <?php echo "
+          
+          
+          <div class=\"card\">
             <img class=\"card-img-top\" src=\"https://pingendo.com/assets/photos/wireframe/photo-1.jpg\" alt=\"Card image cap\">
             <ul class=\"list-group list-group-flush\">
-         
-              <li class=\"list-group-item\">ID: $idnum</li>
-              <li class=\"list-group-item\">Name: $first $last</li>
-              <li class=\"list-group-item\">Username: $username</li>
-              <li class=\"list-group-item\">Email: $email</li>
+              <li class=\"list-group-item\">ID Number: $idnum</li>
+              <li class=\"list-group-item\">Name: $last, $first</li>
+              <li class=\"list-group-item d-flex justify-content-between align-items-start\">Username: $username</li>
+              <li class=\"list-group-item\">DLSU Mail: $email/li>
+              <li class=\"list-group-item d-flex justify-content-between align-items-start\">Date joined: $create</li>
+              <li class=\"list-group-item d-flex justify-content-between align-items-start\">Last signed in: $updated</li>
             </ul>
-        
+   
           </div>"; ?>
-          
-          
-  <a href="adminVerifyAccounts.php" class="btn btn-outline-primary">Back
-                <br>
-              </a>
+           <a href="adminManageAccounts.php" class="btn btn-outline-primary">Back
+                <br> </a>
         </div>
       </div>
     </div>

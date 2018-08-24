@@ -16,39 +16,20 @@ if (!$dbc) {
 
 
 }
+$id = $_GET['rid'];
 
-if (isset($_POST['submit'])){
-    
-    $id=$_POST['updateid'];
-    echo $id;
-    $sql = "UPDATE hello.`user-status` SET  approved = 1 WHERE id = " . $_POST['updateid'];
-  mysqli_query($dbc, $sql);
-    
-    
-}
+         $query="SELECT * FROM hello.`user-status` as us join hello.users_details as u on u.userid =us.id join users as ue on ue.id = us.id where userid=$id
+";
+$result=mysqli_query($dbc,$query);
+  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+ $first =$row['first_name'];
+$last =$row['last_name'];    
+ $username =$row['username'];
+     $idnum =$row['dlsuID'];          
 
-if (isset($_POST['no'])){
-    
-    $id=$_POST['updateid'];
-    
-    $sql = "UPDATE hello.`user-status` SET  disapproved = 1 WHERE id = " . $_POST['updateid'];
-  mysqli_query($dbc, $sql);
-    
-    
-}
-
-
-
-
-
-
-
-
-
-
+ $email =$row['email'];       } 
 
 ?>
-
 <html>
 
 <head>
@@ -78,12 +59,12 @@ if (isset($_POST['no'])){
                 <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="adminVerifyAccounts.php">
+              <a class="nav-link active" href="profile.php">
                 <i class="fa fa-user fa-fw"></i>Verify Accounts &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="adminManageAccounts.php" class="nav-link disabled">
+              <a href="browse.html" class="nav-link disabled">
                 <i class="fa fa-fw fa-search"></i>Manage Accounts
                 <br> </a>
             </li>
@@ -98,59 +79,36 @@ if (isset($_POST['no'])){
             </li>
           </ul>
         </div>
-        <div class="justify-content-center col-md-8">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID Number</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-             
-             <?php 
-                
-                $query="SELECT * FROM hello.`user-status` as us join hello.users_details as u on u.userid =us.id join users as ue on ue.id = us.id
-";
-$result=mysqli_query($dbc,$query);
-                
-                
-             while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $first =$row['first_name'];
-               $last =$row['last_name'];                                                   
-                 $approved =$row['approved'];
-                 $disapproved =$row['disapproved'];                                                 
-                                         $id =    $row['userID'];                                
-                                                                  
-                 $idnum =$row['dlsuID'];
-               if($approved ==0 && $disapproved==0){
-             echo"
-             <form action=\"adminVerifyAccounts.php\" method=\"post\">
-              <tr>
-              
-                <td> <a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
-                <td>$last</td>
-                <td>$first</td>
+        <div class="justify-content-center col-md-4">
+          <div class="row">
+            <div class="col-md-12">
+              <a href="#" class="btn btn-outline-primary">Back
+                <br>
+              </a>
+            </div>
+          </div>
+          
+            <?php echo "<div class=\"card\">
+            <img class=\"card-img-top\" src=\"https://pingendo.com/assets/photos/wireframe/photo-1.jpg\" alt=\"Card image cap\">
+            <ul class=\"list-group list-group-flush\">
          
-                <td><input class=\"btn btn-primary\" type=\"submit\" value=\"Approve\" name=\"submit\" class=\"btn mt-0 btn-outline-dark\">
-                <input class=\"btn btn-outline-primary\" type=\"submit\" value=\"Reject\" name=\"no\" class=\"btn mt-0 btn-outline-dark\">
-                
-                <input type = \"hidden\" name =\"updateid\" class=\"\" value=\"".$id."\">
-                </td>
-              </tr>
-                </form>";}} ?>
-              
-             
-   
-            
-            </tbody>
-          </table>
+              <li class=\"list-group-item\">ID: $idnum</li>
+              <li class=\"list-group-item\">Name: $first $last</li>
+              <li class=\"list-group-item\">Username: $username</li>
+              <li class=\"list-group-item\">Email: $email</li>
+            </ul>
+            <div class=\"card-body\">
+
+            </div>
+          </div>"; ?>
+          
+          
+
         </div>
       </div>
     </div>
   </div>
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!--
@@ -158,7 +116,9 @@ $result=mysqli_query($dbc,$query);
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
 -->
-
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
+    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
+  </pingendo>
 </body>
 
 </html>
