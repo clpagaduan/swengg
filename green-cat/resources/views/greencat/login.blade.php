@@ -70,6 +70,8 @@
 					$('#alert-verify').show();
 				}else if (data.response=='not-verified'){
                     alert('Account not yet verified! Come Back Later!')
+                }else if (data.response=='not-activated'){
+                    window.location.href='profile/'+data.userID;
                 }
 			},
 			error: function (data) {
