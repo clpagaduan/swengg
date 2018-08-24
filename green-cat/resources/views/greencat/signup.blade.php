@@ -84,6 +84,7 @@
 						url: '/signupRegistration',
 						success: function (data) {
 							console.log('Data Success:',data);
+							window.location.href='login'
 							// window.location.href='swipematch';//security error will exist here by: PrivateAirJET
 						},
 						error: function (data) {

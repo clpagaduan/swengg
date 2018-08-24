@@ -52,6 +52,7 @@ class ProcessSignUpController extends Controller
 
         //Login the new user account here
         //By: PrivateAirJET
-        Auth::login($user);
+        // Auth::login($user);
+        //Will not be login till it is verified
     }
 }
