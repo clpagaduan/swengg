@@ -68,7 +68,9 @@
 				}else if (data.response=='error'){
 					$('#alert-verify').html('Error invalid username or password!');
 					$('#alert-verify').show();
-				}
+				}else if (data.response=='not-verified'){
+
+                }
 			},
 			error: function (data) {
 				console.log('Data Error:', data);
