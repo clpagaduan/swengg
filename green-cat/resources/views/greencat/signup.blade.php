@@ -75,7 +75,7 @@
 						password:$('#password').val(),
 						dlsuID:$('#dlsuID').val(),
 						email:$('#email').val(),
-						schoolID:$('#schoolID'),
+						// schoolID:$('#schoolID').files[0], //Error Illegal Invocation if this is passed. HTML value should be passed
 					}
 					
 					$.ajax({
@@ -84,7 +84,7 @@
 						url: '/signupRegistration',
 						success: function (data) {
 							console.log('Data Success:',data);
-							window.location.href='login'
+							window.location.href='login';
 							// window.location.href='swipematch';//security error will exist here by: PrivateAirJET
 						},
 						error: function (data) {
