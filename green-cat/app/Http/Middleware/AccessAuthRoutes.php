@@ -16,9 +16,7 @@ class AccessAuthRoutes
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()) {  
-            return redirect('/');
-        }else{
+        if (Auth::user()) {  
             if(Auth::user()->account_flag2==0){
                 return redirect('profile/'.Auth::user()->id);
             }else{
