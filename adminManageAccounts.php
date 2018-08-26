@@ -3,8 +3,8 @@
 <?php
 session_start();
 
-$dbc=mysqli_connect('localhost','root',null,'hello');
-
+//$dbc=mysqli_connect('localhost','root',null,'hello');
+require_once('mysql_connect.php');
 
 
 
