@@ -1,0 +1,364 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema hello
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema hello
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `hello` DEFAULT CHARACTER SET latin1 ;
+USE `hello` ;
+
+-- -----------------------------------------------------
+-- Table `hello`.`account-controls`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`account-controls` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `administrator` INT(2) NOT NULL,
+  `student` INT(2) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`user-status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`user-status` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `active` INT(2) NOT NULL,
+  `inactive` INT(2) NOT NULL,
+  `approved` INT(2) NOT NULL,
+  `disapproved` INT(2) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`app-users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`app-users` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `privilegeID` INT(5) NULL DEFAULT NULL,
+  `statusID` INT(5) NULL DEFAULT NULL,
+  `access-token` CHAR(32) NULL DEFAULT NULL,
+  `username` VARCHAR(100) NULL DEFAULT NULL,
+  `password` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(200) NULL DEFAULT NULL,
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+  `rating` INT(5) NULL DEFAULT NULL,
+  `verified` TINYINT(4) NULL DEFAULT NULL,
+  `dlsuID` INT(8) NULL DEFAULT NULL,
+  `IDNum` INT(10) NULL DEFAULT NULL,
+  `age` INT(5) NULL DEFAULT NULL,
+  `photo` BLOB NULL DEFAULT NULL,
+  `lastname` VARCHAR(45) NULL DEFAULT NULL,
+  `firstname` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `account-control-id_idx` (`privilegeID` ASC),
+  INDEX `user-status-id_idx` (`statusID` ASC),
+  CONSTRAINT `account-control-id`
+    FOREIGN KEY (`privilegeID`)
+    REFERENCES `hello`.`account-controls` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `user-status-id`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `hello`.`user-status` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 13
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`customers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`customers` (
+  `customerNumber` INT(11) NOT NULL,
+  `customerName` VARCHAR(45) NULL DEFAULT NULL,
+  `phoneNumber` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`customerNumber`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`matches`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`matches` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `statusID` INT(5) NOT NULL,
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `access-token` CHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `matches-user-status-id_idx` (`statusID` ASC),
+  CONSTRAINT `matches-user-status-id`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `hello`.`user-status` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`migrations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`migrations` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` VARCHAR(255) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `batch` INT(11) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`password_resets`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`password_resets` (
+  `email` VARCHAR(255) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `token` VARCHAR(255) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  INDEX `password_resets_email_index` (`email`(191) ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`payments`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`payments` (
+  `customerNumber` INT(11) NOT NULL,
+  `modeOfPayment` VARCHAR(45) NULL DEFAULT NULL,
+  `amount` INT(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`customerNumber`),
+  CONSTRAINT `fk_Payments_Customers`
+    FOREIGN KEY (`customerNumber`)
+    REFERENCES `hello`.`customers` (`customerNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`reviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`reviews` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `reviewerID` INT(5) NOT NULL,
+  `matchID` INT(5) NOT NULL,
+  `review` VARCHAR(255) NOT NULL,
+  `rating` INT(5) NOT NULL,
+  `verified` TINYINT(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `revews-user-reviews-id_idx` (`reviewerID` ASC),
+  INDEX `matches-reviews-id_idx` (`matchID` ASC),
+  CONSTRAINT `matches-reviews-id`
+    FOREIGN KEY (`matchID`)
+    REFERENCES `hello`.`matches` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `revews-user-reviews-id`
+    FOREIGN KEY (`reviewerID`)
+    REFERENCES `hello`.`app-users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`s_chat_messages`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`s_chat_messages` (
+  `chatID` INT(11) NOT NULL AUTO_INCREMENT,
+  `user` VARCHAR(45) NULL DEFAULT NULL,
+  `message` VARCHAR(2405) NULL DEFAULT NULL,
+  `whenn` DATETIME NULL DEFAULT NULL,
+  `rid` INT(11) NULL DEFAULT NULL,
+  `id` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`chatID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`user-dlsu`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`user-dlsu` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `alumni` INT(2) NOT NULL,
+  `undergraduate` INT(2) NOT NULL,
+  `graduate` INT(2) NOT NULL,
+  `others` INT(2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`user-matches`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`user-matches` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `userID` INT(5) NOT NULL,
+  `matchID` INT(5) NOT NULL,
+  `status` INT(5) NOT NULL,
+  `super_like` INT(5) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user-matches-users-id_idx` (`userID` ASC),
+  CONSTRAINT `user-matches-matches-id`
+    FOREIGN KEY (`userID`)
+    REFERENCES `hello`.`app-users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`user-resources`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`user-resources` (
+  `id` INT(5) NOT NULL AUTO_INCREMENT,
+  `userID` INT(5) NOT NULL,
+  `image` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user-resources-users-id_idx` (`userID` ASC),
+  CONSTRAINT `user-resources-users-id`
+    FOREIGN KEY (`userID`)
+    REFERENCES `hello`.`app-users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`user-reviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`user-reviews` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `userID` INT(5) NOT NULL,
+  `reviewID` INT(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user-reviews-users-id_idx` (`userID` ASC),
+  INDEX `user-reviews-reviews-id_idx` (`reviewID` ASC),
+  CONSTRAINT `user-reviews-reviews-id`
+    FOREIGN KEY (`reviewID`)
+    REFERENCES `hello`.`reviews` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `user-reviews-users-id`
+    FOREIGN KEY (`userID`)
+    REFERENCES `hello`.`app-users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`userpreferences`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`userpreferences` (
+  `id` INT(15) NOT NULL AUTO_INCREMENT,
+  `GPA` INT(3) NULL DEFAULT NULL,
+  `age` INT(3) NULL DEFAULT NULL,
+  `college` VARCHAR(100) NULL DEFAULT NULL,
+  `interest1` VARCHAR(100) NULL DEFAULT NULL,
+  `interest2` VARCHAR(100) NULL DEFAULT NULL,
+  `interest3` VARCHAR(100) NULL DEFAULT NULL,
+  `interest4` VARCHAR(100) NULL DEFAULT NULL,
+  `interest5` VARCHAR(100) NULL DEFAULT NULL,
+  `interest6` VARCHAR(100) NULL DEFAULT NULL,
+  `interest7` VARCHAR(100) NULL DEFAULT NULL,
+  `interest8` VARCHAR(100) NULL DEFAULT NULL,
+  `interest9` VARCHAR(100) NULL DEFAULT NULL,
+  `interest10` VARCHAR(100) NULL DEFAULT NULL,
+  `course` VARCHAR(100) NULL DEFAULT NULL,
+  `department` VARCHAR(100) NULL DEFAULT NULL,
+  `userID` INT(5) NOT NULL,
+  `batch` INT(5) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user-preferences-users-id_idx` (`userID` ASC),
+  CONSTRAINT `user-preferences-users-id`
+    FOREIGN KEY (`userID`)
+    REFERENCES `hello`.`app-users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 15
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`users` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `account_flag` INT(2) NOT NULL,
+  `account_flag2` INT(2) NOT NULL,
+  `username` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `email` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `password` VARCHAR(255) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `dlsuID` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `remember_token` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  `description` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
+  `account_type` VARCHAR(30) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
+  `daily_back` INT(10) NULL DEFAULT NULL,
+  `image` BLOB NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `users_email_unique` (`email` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 18
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_unicode_ci;
+
+
+-- -----------------------------------------------------
+-- Table `hello`.`users_details`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hello`.`users_details` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `userID` INT(10) NOT NULL,
+  `photo` BLOB NULL DEFAULT NULL,
+  `first_name` VARCHAR(255) NULL DEFAULT NULL,
+  `last_name` VARCHAR(255) NULL DEFAULT NULL,
+  `age` INT(10) NULL DEFAULT NULL,
+  `description` VARCHAR(255) NULL DEFAULT NULL,
+  `interest1` VARCHAR(255) NULL DEFAULT NULL,
+  `interest2` VARCHAR(255) NULL DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
