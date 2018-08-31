@@ -87,7 +87,7 @@
                 <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login
                   </button><br> <br>
                   Not yet registered? <a href="signup.php"> Sign up now!</a><br>
-                  <a href="">Admin</a>
+                  <a href="adminDashboard.php">Admin</a>
               </form>
             </div>
           </div>
