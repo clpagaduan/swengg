@@ -83,17 +83,17 @@ if (!$dbc) {
 $result=mysqli_query($dbc,$query);
                                 
                                      while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $username =$row['username'];
-                 $active =$row['active'];
+                 $active =$row['account_flag2'];
                                                                   
-                $approved =$row['approved'];                         $disapproved =$row['disapproved'];                           
-                 $inactive =$row['inactive'];                             $id =    $row['id'];                               $type =$row['account_type'];     
+                $approved =$row['account_flag'];                                                  
+                                     $id =    $row['id'];                               $type =$row['account_type'];     
                                                                   
                  $idnum =$row['dlsuID'];
-                    if($approved ==0 && $disapproved ==0)   {
+                    if($approved ==0)   {
                         $verifiedacc =$verifiedacc+1;
                     }                                     
                                                                                          
-                         if($inactive ==1)   {
+                         if($active ==0)   {
                         $suspendedacc =$suspendedacc+1;
                     }                                                                          
                                                                                          }

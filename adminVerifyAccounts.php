@@ -20,8 +20,7 @@ if (!$dbc) {
 if (isset($_POST['submit'])){
     
     $id=$_POST['updateid'];
-    echo $id;
-    $sql = "UPDATE hello.`user-status` SET  approved = 1 WHERE id = " . $_POST['updateid'];
+    $sql = "UPDATE users SET  account_flag = 1 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
@@ -31,7 +30,7 @@ if (isset($_POST['no'])){
     
     $id=$_POST['updateid'];
     
-    $sql = "UPDATE hello.`user-status` SET  disapproved = 1 WHERE id = " . $_POST['updateid'];
+    $sql = "UPDATE users SET  account_flag = 2 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
@@ -108,19 +107,19 @@ if (isset($_POST['no'])){
              
              <?php 
                 
-                $query="SELECT * FROM hello.`user-status` as us join hello.users_details as u on u.userid =us.id join users as ue on ue.id = us.id
+                $query="SELECT * FROM users as us join hello.users_details as u on u.userid =us.id 
 ";
 $result=mysqli_query($dbc,$query);
                 
                 
              while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $first =$row['first_name'];
                $last =$row['last_name'];                                                   
-                 $approved =$row['approved'];
-                 $disapproved =$row['disapproved'];                                                 
+                 $approved =$row['account_flag'];
+                                                                
                                          $id =    $row['userID'];                                
                                                                   
                  $idnum =$row['dlsuID'];
-               if($approved ==0 && $disapproved==0){
+               if($approved ==0 ){
              echo"
              <form action=\"adminVerifyAccounts.php\" method=\"post\">
               <tr>

@@ -21,9 +21,9 @@ if (isset($_POST['submit'])){
     
     $id=$_POST['updateid'];
     
-    $sql = "UPDATE hello.`user-status` SET active = 0, inactive = 1 WHERE id = " . $_POST['updateid'];
+    $sql = "UPDATE users SET account_flag2 = 0 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
-    
+
     
 }
 
@@ -37,7 +37,7 @@ if (isset($_POST['inactive'])){
     $id=$_POST['updateid'];
     
     
-    $sql = "UPDATE hello.`user-status` SET active = 1, inactive = 0 WHERE id = " . $_POST['updateid'];
+    $sql = "UPDATE users SET account_flag2 = 1 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
@@ -119,15 +119,15 @@ if (isset($_POST['inactive'])){
              
              <?php 
                 
-                $query="SELECT * FROM hello.`user-status` as us join users as u on u.id = us.id";
+                $query="SELECT * FROM users ";
 $result=mysqli_query($dbc,$query);
                 
                 
              while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $username =$row['username'];
-                 $active =$row['active'];
+                 $active =$row['account_flag2'];
                                                                   
-                $approved =$row['approved'];                                                  
-                 $inactive =$row['inactive'];                             $id =    $row['id'];                               $type =$row['account_type'];     
+                $approved =$row['account_flag'];                                                  
+                             $id =    $row['id'];                               $type =$row['account_type'];     
                                                                   
                  $idnum =$row['dlsuID'];
                 if($active==1 &&  $approved ==1){
@@ -145,7 +145,7 @@ $result=mysqli_query($dbc,$query);
               </tr>
                 </form>";}
                                                                  
-                   else if($inactive==1  &&  $approved ==1){
+                   else if($active==0  &&  $approved ==1){
              echo"<form action=\"adminManageAccounts.php\" method=\"post\">
               <tr>
                 <td><a href=\"adminmanageAccountID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
