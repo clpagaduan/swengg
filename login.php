@@ -11,7 +11,7 @@
     <?php
     session_start();
     
-    $dbc=mysqli_connect('localhost','root','password','mydb');
+    $dbc=mysqli_connect('localhost','root',NULL,'hello');
     
     $flag=0;
     $message=null;
@@ -22,22 +22,39 @@
             $username = $_POST['username'];
             $password = $_POST['password'];
             
-            echo $username;
-            echo $password2=md5($password);
+//            echo $username;
+//            echo $password2=md5($password);
             
-            $sql = 'SELECT id from users where username = "'.$username.'" AND password =("'.$password2.'")';
+            $sql = 'SELECT * from hello.users where username = "'.$username.'" AND password ="'.$password2.'"';
             
             $result = mysqli_query($dbc, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 //            $active = $row['active'];
             $count = mysqli_num_rows($result);
             
-            if ($count == 1){
+//            echo "Count: " . $count;
+            
+//            while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $accountStatus1 = $row['account_flag'];
+                $accountStatus2 = $row['account_flag2'];
+//            }
+            
+            if ($count == 1 && $accountStatus1 == 1 && $accountStatus2 == 1){
                 $_SESSION['username'] = $username;
-                header("location: profileEdit.php");
+                header("location: userEditProfile.html");
+            } elseif ($accountStatus1 == 0){
+                $message="<div class='alert alert-danger'><span aria-hidden='true'><b><center>Your account is not yet activated.</center></span></div>";
+            } elseif ($accountStatus2 == 0) {
+                $message="<div class='alert alert-danger'><span aria-hidden='true'><b><center>Your account has been suspended.</center></span></div>";
             } else {
-                echo "Error: " . mysqli_error($dbc);
+//                echo "Error: " . mysqli_error($dbc);
+                $message="<div class='alert alert-danger'><span aria-hidden='true'><b><center>The credentials you provided don't match our records.<br>Please try again.</center></span></div>";
             }
+            
+            if (isset($message)){
+     echo '<font color="blue">'.$message. '</font>';
+    }
+
             
 //            if($total = mysqli_num_rows($result)==1){
 //                $_SESSION['username'] = $username;
@@ -87,7 +104,7 @@
                 <button type="submit" name="login" class="btn mt-2 btn-outline-dark">Login
                   </button><br> <br>
                   Not yet registered? <a href="signup.php"> Sign up now!</a><br>
-                  <a href="adminDashboard.php">Admin</a>
+<!--                  <a href="adminDashboard.php">Admin</a>-->
               </form>
             </div>
           </div>

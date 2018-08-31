@@ -20,7 +20,7 @@ if (!$dbc) {
 if (isset($_POST['submit'])){
     
     $id=$_POST['updateid'];
-    $sql = "UPDATE users SET  account_flag = 1 WHERE id = " . $_POST['updateid'];
+    $sql = "UPDATE users SET  account_flag = 1, account_flag2 = 1 WHERE id = " . $_POST['updateid'];
   mysqli_query($dbc, $sql);
     
     
@@ -98,8 +98,8 @@ if (isset($_POST['no'])){
             <thead>
               <tr>
                 <th>ID Number</th>
-                <th>Last Name</th>
-                <th>First Name</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -107,16 +107,16 @@ if (isset($_POST['no'])){
              
              <?php 
                 
-                $query="SELECT * FROM users as us join hello.users_details as u on u.userid =us.id 
+                $query="SELECT * FROM users 
 ";
 $result=mysqli_query($dbc,$query);
                 
                 
-             while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $first =$row['first_name'];
-               $last =$row['last_name'];                                                   
+             while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){   $userna =$row['username'];
+               $mail =$row['email'];                                                   
                  $approved =$row['account_flag'];
                                                                 
-                                         $id =    $row['userID'];                                
+                                         $id =    $row['id'];                                
                                                                   
                  $idnum =$row['dlsuID'];
                if($approved ==0 ){
@@ -125,8 +125,8 @@ $result=mysqli_query($dbc,$query);
               <tr>
               
                 <td> <a href=\"adminVerifyAccountsID.php?rid=$id\" class=\"nav-link active\">$idnum</a></td>
-                <td>$last</td>
-                <td>$first</td>
+                <td>$userna</td>
+                <td>$mail</td>
          
                 <td><input class=\"btn btn-primary\" type=\"submit\" value=\"Approve\" name=\"submit\" class=\"btn mt-0 btn-outline-dark\">
                 <input class=\"btn btn-outline-primary\" type=\"submit\" value=\"Reject\" name=\"no\" class=\"btn mt-0 btn-outline-dark\">

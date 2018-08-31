@@ -16,7 +16,7 @@
 
 <body>
     <?php
-    $dbc=mysqli_connect('localhost','root','password','mydb');
+   $dbc=mysqli_connect('localhost','root',null,'hello');
     $flag=0;
 $cn=$ca=$cnum=$cea=$cfn=$cln=$crnum=$cra=$un=$pw=$crea=NULL;
 $empties=$invalid=0;
@@ -68,7 +68,7 @@ $empties=$invalid=0;
         $passwordNew = md5($password);
         
 //        echo $passwordNew;
-        $query = "INSERT INTO mydb.users (username, dlsuID, email, password) VALUES ('$username', '$dlsuid', '$email', '$passwordNew')"; 
+        $query = "INSERT INTO users (username, dlsuID, email, password) VALUES ('$username', '$dlsuid', '$email', '$passwordNew')"; 
         
         
 //        $result = mysqli_query($dbc,$query);
@@ -79,20 +79,14 @@ $empties=$invalid=0;
             echo "Error: " . mysqli_error($dbc);
         }
         
-        $queryID = "SELECT id from mydb.users WHERE username = '$username'";      
+        $queryID = "SELECT id from users WHERE username = '$username'";      
         $resultID=mysqli_query($dbc,$queryID);
         $row = mysqli_fetch_array($resultID, MYSQLI_ASSOC);
         $userID = $row['id'];
         echo 'user id: ' . $userID;
         
-        $queryInterest = "INSERT INTO mydb.userpreferences (userID) VALUES ('$userID')";
-        
-        if (mysqli_query($dbc, $queryInterest)){
-            echo "Registered!";
-        } else {
-            echo "Error: " . mysqli_error($dbc);
-        }
-        
+  
+
         $message="<div class='alert alert-success'><span aria-hidden='true'><b><font color='black'><center>Account has been sent for approval!</center></font></span></div>";
 
 $flag=1;
