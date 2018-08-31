@@ -26,13 +26,13 @@ Route::post('editUserProfile','EditUserProfileController@process');
 Route::get('logout', 'LogoutUserController@logout');
 
 //Group controllers
-Route::middleware(['CheckLoginRoute'])->group(function (){
+Route::middleware(['AccessAuthRoutes'])->group(function (){
     Route::resource('/','LoginController');
     Route::resource('signup','SignUpController');
+    Route::resource('profile','ProfileController');
 });
 
-Route::middleware(['AccessAuthRoutes'])->group(function (){
+Route::middleware(['CheckLoginRoute'])->group(function (){
     Route::resource('swipematch','SwipeMatchController');
-    Route::resource('profile','ProfileController');
     Route::resource('message','MessageController');
 });

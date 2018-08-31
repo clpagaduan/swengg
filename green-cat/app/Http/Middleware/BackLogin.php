@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 
-class AccessAuthRoutes
+class BackLogin
 {
     /**
      * Handle an incoming request.
@@ -16,12 +15,8 @@ class AccessAuthRoutes
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()) {  
-            if(Auth::user()->account_flag2==0){
-                return redirect('profile/'.Auth::user()->id);
-            }else{
-                return redirect('swipematch');
-            }
+        if (!Auth::user()) {  
+           redirect('/');
         }
         return $next($request);
     }

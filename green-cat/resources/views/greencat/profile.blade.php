@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="greencat.css" type="text/css"> </head>
+  <link rel="stylesheet" href={{asset('css/greencat.css')}} type="text/css"> </head>
 
 <body>
   <div class="py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="">Edit Profile &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <h1 class="">User - {{strtoupper(Auth::user()->username)}}
             <br> </h1>
         </div>
       </div>
@@ -24,26 +24,22 @@
         <div class="col-md-4">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a href="userDashboard.html" class="nav-link disabled">
-                <i class="fa fa-home fa-home"></i>&nbsp;Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="userViewProfile.html">
+              <a class="nav-link active" href="/profile/{{Auth::user()->id}}">
                 <i class="fa fa-user fa-fw"></i>Profile &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a href="userBrowse.html" class="nav-link disabled">
+              <a href="/swipematch" class="nav-link disabled">
                 <i class="fa fa-fw fa-search"></i>Browse &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="userMessages.html">
-                <i class="fa fa-fw fa-inbox"></i>Messages &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <a class="nav-link disabled" href="/user-match">
+                <i class="fa fa-fw fa-inbox"></i>Matches &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <br> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="login.php">
+              <a class="nav-link disabled" href="/logout">
                 <i class="fa fa-fw fa-sign-out"></i>Logout</a>
             </li>
           </ul>
@@ -82,7 +78,8 @@
             </ul>
             <div class="form-group">
               <label for="exampleInputEmail1">Nickname</label>
-              <input type="text" class="form-control" id="inlineFormInput" placeholder="e.g. Delo"> </div>
+              <input type="text" class="form-control" id="inlineFormInput" placeholder="e.g. Delo">
+            </div>
             <div class="form-group">
               <label>About Me</label>
               <input type="text" class="form-control" placeholder="Tell something about yourself."> </div>
@@ -106,7 +103,8 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Organizations</label>
-              <input type="text" class="form-control" id="inlineFormInput" placeholder="e.g. LSDC, Harlequin, Chorale"> </div>
+              <input type="text" class="form-control" id="inlineFormInput" placeholder="e.g. LSDC, Harlequin, Chorale">
+            </div>
             <div class="form-group">
               <label>Interests</label>
               <input type="text" class="form-control" placeholder="e.g. Star Wars, Taylor Swift, Board Games"> </div>

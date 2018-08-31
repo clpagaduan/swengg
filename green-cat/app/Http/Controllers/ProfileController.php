@@ -47,7 +47,7 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = UserProfile::where('userID','=',$id)->first();
-        return view('greencat.editprofile')
+        return view('greencat.profile')
                     ->with('user',$user);
     }
 
